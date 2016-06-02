@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>MAPPLAY</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="style/cartodb.css" />
+    <link rel="stylesheet" href="style/style.css" />
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+    <div class="firstcenter">
+        <h1>MapPlay</h1>
+        <p>Answer the questions with the map</p>
+        <br>
+        <b class="butn" id="startgame">Start right now!</b></div>
+    <div class="questionbox">
+        <h1 id="h1quest"></h1>
+        <b class="butn" id="startmap">Usar mapa!</b></div>
+    <div class="yesorno">
+        <h1 id="yesornoh1"></h1>
+        <b class="butn" id="nextorno">Go map!</b></div>
+    <div class='cartodb-legend choropleth'>
+        <h3>Puntuation: <span id="counter">0</span></h3>
+
+    </div>
+    <div id="map">
+    </div>
+    <script src="http://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
+    <script src="js/jquery-2.2.4.min.js"></script>
+    <script>
+        var preguntas = ["Where you can eat paella?", "Where obama live?", "Where papa live?"];
+        var respuestas = ["Spain", "United States", "Italy"];
+        var numero = Math.floor((Math.random() * 3) + 0);
+        var counter = 0;
+        $("#startgame").click(function() {
+            $(".firstcenter").css("opacity", "0");
+            setTimeout(function() {
+                $(".firstcenter").css("display", "none");
+                $(".questionbox").css("display", "block");
+            }, 301);
+            setTimeout(function() {
+                $(".questionbox").css("opacity", "1");
+            }, 302);
+            setTimeout(function() {
+                document.getElementById("h1quest").innerHTML = preguntas[numero];
+            }, 302);
+
+        });
+
+        $("#startmap").click(function() {
+            $(".questionbox").css("opacity", "0");
+            setTimeout(function() {
+                $(".questionbox").css("display", "none");
+            }, 301);
+        });
+
+        $("#nextorno").click(function() {
+            $(".yesorno").css("opacity", "0");
+            setTimeout(function() {
+                $(".yesorno").css("display", "none");
+                $(".questionbox").css("display", "block");
+            }, 301);
+            setTimeout(function() {
+                $(".questionbox").css("opacity", "1");
+            }, 302);
+            setTimeout(function() {
+                numero = Math.floor((Math.random() * 2) + 0);
+                document.getElementById("h1quest").innerHTML = preguntas[numero];
+            }, 302);
+
+        });
+
+        function main() {
+            var map = new L.Map('map', {
+                zoomControl: false,
+                center: [0, 0],
+                zoom: 3
+            });
+
+            L.tileLayer('http://tile.stamen.com/toner/{z}/{x}/{y}.png', {
+                attribution: 'Stamen'
+            }).addTo(map);
+
+            var popup = L.popup();
+            //map.on('click', onMapClick);
+
+            cartodb.createLayer(map, {
+                    user_name: 'hectoruch',
+                    type: 'cartodb',
+                    sublayers: [{
+                        sql: "SELECT * FROM world_borders",
+                        cartocss: '#world_borders, #world_borders [subregion<=13]{polygon-fill:#FFFFB2} #world_borders{polygon-opacity:.8;line-color:#FFF;line-width:2;line-opacity:1} #world_borders [subregion<=155]{polygon-fill:#B10026} #world_borders [subregion<=145]{polygon-fill:#E31A1C} #world_borders [subregion<=57]{polygon-fill:#FC4E2A} #world_borders [subregion<=39]{polygon-fill:#FD8D3C} #world_borders [subregion<=29]{polygon-fill:#FEB24C} #world_borders [subregion<=17]{polygon-fill:#FED976}',
+                        interactivity: 'area, name'
+                    }]
+                })
+                .addTo(map)
+                .done(function(layer) {
+                    layer.setInteraction(true);
+                    layer.on('featureClick', function(e, latlng, pos, data) {
+                        if (data.name == respuestas[numero]) {
+                            $(".yesorno").css("display", "block");
+                            counter++;
+                            document.getElementById("yesornoh1").innerHTML = "GREAT!";
+                            document.getElementById("nextorno").innerHTML = "Other question";
+                            document.getElementById("counter").innerHTML = counter;
+                            setTimeout(function() {
+                                $(".yesorno").css("opacity", "1");
+                            }, 10);
+                        } else {
+                            $(".yesorno").css("display", "block");
+                            counter--;
+                            document.getElementById("yesornoh1").innerHTML = "FAIL";
+                            document.getElementById("nextorno").innerHTML = "Other question";
+                            document.getElementById("counter").innerHTML = counter;
+                            setTimeout(function() {
+                                $(".yesorno").css("opacity", "1");
+                            }, 10);
+                        }
+                        var popup = L.popup()
+                            .setLatLng(latlng)
+                            .setContent('<h1>' + data.name + '</h1>')
+                            .openOn(map);
+
+                    });
+                    layer.on('featureOver', function(e, latlng, pos, data) {
+                        console.log("click polygon with data: " + data.name);
+                    });
+                }).on('error', function() {
+                    cartodb.log.log("some error occurred");
+                });
+
+            function popupfunction(dir, namedata) {
+                alert("d" + dir);
+                var popup = L.popup()
+                    .setLatLng(dir)
+                    .setContent(namedata)
+                    .openOn(map);
+            }
+        }
+        window.onload = main;
+    </script>
+</body>
+
+</html>
