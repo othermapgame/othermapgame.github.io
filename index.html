@@ -2,75 +2,53 @@
 <html>
 
 <head>
-    <title>MAPPLAY</title>
+    <title>map_game_nature</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" href="style/cartodb.css" />
-    <link rel="stylesheet" href="style/style.css" />
-    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/cartodb.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="node_modules/sweetalert/dist/sweetalert.css">
 </head>
 
 <body>
-    <div class="firstcenter">
-        <h1>MapPlay</h1>
-        <p>Answer the questions with the map</p>
-        <br>
-        <b class="butn" id="startgame">Start right now!</b></div>
-    <div class="questionbox">
-        <h1 id="h1quest"></h1>
-        <b class="butn" id="startmap">Usar mapa!</b></div>
-    <div class="yesorno">
-        <h1 id="yesornoh1"></h1>
-        <b class="butn" id="nextorno">Go map!</b></div>
-    <div class='cartodb-legend choropleth'>
-        <h3>Puntuation: <span id="counter">0</span></h3>
-
+    <div id="menu">
+        <h1>What is map_game_nature?</h1>
+        <p>The graphic designer’s first fucking consideration is always the size and shape of the format, whether for the printed page or for digital display. Think about all the fucking possibilities. Sometimes it is appropriate to place various typographic
+            elements on the outside of the fucking left margin of text to maintain a strong vertical axis.</p>
+        <ul>
+            <li>Contact</li>
+            <li>Go github</li>
+            <li>map_game_nature v.0.2</li>
+        </ul>
+    </div>
+    <div class="scorenav">
+        <b>Your score: <span id="scorenumber">0 | </span><span id="openmenubutn">open menu</span><span id="finishbutn"> | finish game</span></b>
     </div>
     <div id="map">
     </div>
-    <script src="http://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
     <script src="js/jquery-2.2.4.min.js"></script>
+    <script src="http://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
+    <script src="node_modules/sweetalert/dist/sweetalert.min.js"></script>
     <script>
-        var preguntas = ["Where you can eat paella?", "Where obama live?", "Where papa live?"];
-        var respuestas = ["Spain", "United States", "Italy"];
-        var numero = Math.floor((Math.random() * 3) + 0);
-        var counter = 0;
-        $("#startgame").click(function() {
-            $(".firstcenter").css("opacity", "0");
-            setTimeout(function() {
-                $(".firstcenter").css("display", "none");
-                $(".questionbox").css("display", "block");
-            }, 301);
-            setTimeout(function() {
-                $(".questionbox").css("opacity", "1");
-            }, 302);
-            setTimeout(function() {
-                document.getElementById("h1quest").innerHTML = preguntas[numero];
-            }, 302);
-
-        });
-
-        $("#startmap").click(function() {
-            $(".questionbox").css("opacity", "0");
-            setTimeout(function() {
-                $(".questionbox").css("display", "none");
-            }, 301);
-        });
-
-        $("#nextorno").click(function() {
-            $(".yesorno").css("opacity", "0");
-            setTimeout(function() {
-                $(".yesorno").css("display", "none");
-                $(".questionbox").css("display", "block");
-            }, 301);
-            setTimeout(function() {
-                $(".questionbox").css("opacity", "1");
-            }, 302);
-            setTimeout(function() {
-                numero = Math.floor((Math.random() * 2) + 0);
-                document.getElementById("h1quest").innerHTML = preguntas[numero];
-            }, 302);
-
+        var number = 0;
+        number = Math.floor((Math.random() * 3) + 0);
+        var scorenumber = 0;
+        var questions = ['THE REDWOOD FORESTS OF CALIFORNIA', 'THE LONGLEAF PINE SAVANNA OF THE SOUTHEASTERN UNITED STATES', 'THE MADREAN PINE-OAK WOODLANDS IN MEXICO AND THE SOUTHWESTERN UNITED STATES ']
+        var answer = ['THE REDWOOD FORESTS OF CALIFORNIA', 'THE LONGLEAF PINE SAVANNA OF THE SOUTHEASTERN UNITED STATES', 'THE MADREAN PINE-OAK WOODLANDS IN MEXICO AND THE SOUTHWESTERN UNITED STATES ']
+        swal({
+            title: "map_game_nature",
+            text: "Answer the questions with the map",
+            confirmButtonColor: "#f55959",
+            confirmButtonText: "Start, right now!",
+            closeOnConfirm: false,
+        }, function() {
+            swal({
+                title: "Question",
+                text: "WHERE IS " + questions[number] + " ?",
+                confirmButtonColor: "#f55959",
+                confirmButtonText: "Go map",
+            });
         });
 
         function main() {
@@ -79,69 +57,95 @@
                 center: [0, 0],
                 zoom: 3
             });
-
             L.tileLayer('http://tile.stamen.com/toner/{z}/{x}/{y}.png', {
                 attribution: 'Stamen'
             }).addTo(map);
-
             var popup = L.popup();
             //map.on('click', onMapClick);
-
             cartodb.createLayer(map, {
                     user_name: 'hectoruch',
                     type: 'cartodb',
                     sublayers: [{
-                        sql: "SELECT * FROM world_borders",
-                        cartocss: '#world_borders, #world_borders [subregion<=13]{polygon-fill:#FFFFB2} #world_borders{polygon-opacity:.8;line-color:#FFF;line-width:2;line-opacity:1} #world_borders [subregion<=155]{polygon-fill:#B10026} #world_borders [subregion<=145]{polygon-fill:#E31A1C} #world_borders [subregion<=57]{polygon-fill:#FC4E2A} #world_borders [subregion<=39]{polygon-fill:#FD8D3C} #world_borders [subregion<=29]{polygon-fill:#FEB24C} #world_borders [subregion<=17]{polygon-fill:#FED976}',
-                        interactivity: 'area, name'
+                        sql: "SELECT * FROM map_game_nature",
+                        cartocss: '#map_game_nature{ marker-fill-opacity: 1; marker-line-color: #FFF; marker-line-width: 1.5; marker-line-opacity: 1; marker-placement: point; marker-type: ellipse; marker-width: 12; marker-fill: #f55959; marker-allow-overlap: true; }',
+                        interactivity: 'name, the_geom, description'
                     }]
                 })
                 .addTo(map)
                 .done(function(layer) {
                     layer.setInteraction(true);
                     layer.on('featureClick', function(e, latlng, pos, data) {
-                        if (data.name == respuestas[numero]) {
-                            $(".yesorno").css("display", "block");
-                            counter++;
-                            document.getElementById("yesornoh1").innerHTML = "GREAT!";
-                            document.getElementById("nextorno").innerHTML = "Other question";
-                            document.getElementById("counter").innerHTML = counter;
-                            setTimeout(function() {
-                                $(".yesorno").css("opacity", "1");
-                            }, 10);
+                        if (answer[number] == data.name) {
+                            scorenumber++;
+                            document.getElementById("scorenumber").innerHTML = scorenumber + " | ";
+                            swal({
+                                title: "Great :)",
+                                text: data.description,
+                                type: "success",
+                                confirmButtonColor: "#f55959",
+                                confirmButtonText: "Next question",
+                                closeOnConfirm: false,
+                            }, function() {
+                                number = Math.floor((Math.random() * 3) + 0);
+                                swal({
+                                    title: "Question",
+                                    text: "WHERE IS " + questions[number] + " ?",
+                                    confirmButtonColor: "#f55959",
+                                    confirmButtonText: "Go map",
+                                });
+                            });
                         } else {
-                            $(".yesorno").css("display", "block");
-                            counter--;
-                            document.getElementById("yesornoh1").innerHTML = "FAIL";
-                            document.getElementById("nextorno").innerHTML = "Other question";
-                            document.getElementById("counter").innerHTML = counter;
-                            setTimeout(function() {
-                                $(".yesorno").css("opacity", "1");
-                            }, 10);
+                            scorenumber--;
+                            document.getElementById("scorenumber").innerHTML = scorenumber + " | ";
+                            swal({
+                                title: "Fail :(",
+                                text: "",
+                                type: "error",
+                                confirmButtonColor: "#f55959",
+                                confirmButtonText: "Next question",
+                                closeOnConfirm: false,
+                            }, function() {
+                                number = Math.floor((Math.random() * 3) + 0);
+                                swal({
+                                    title: "Question",
+                                    text: "WHERE IS " + questions[number] + " ?",
+                                    confirmButtonColor: "#f55959",
+                                    confirmButtonText: "Go map",
+                                });
+                            });
                         }
-                        var popup = L.popup()
-                            .setLatLng(latlng)
-                            .setContent('<h1>' + data.name + '</h1>')
-                            .openOn(map);
-
-                    });
-                    layer.on('featureOver', function(e, latlng, pos, data) {
-                        console.log("click polygon with data: " + data.name);
                     });
                 }).on('error', function() {
                     cartodb.log.log("some error occurred");
                 });
-
-            function popupfunction(dir, namedata) {
-                alert("d" + dir);
-                var popup = L.popup()
-                    .setLatLng(dir)
-                    .setContent(namedata)
-                    .openOn(map);
-            }
         }
         window.onload = main;
+        $("#openmenubutn").click(function() {
+            $("#scorenav").css("display", "none");
+            $("#menu").slideToggle("slow", function() {});
+        });
+
+        $("#finishbutn").click(function() {
+            swal({
+                title: "Your score is",
+                text: scorenumber,
+                confirmButtonColor: "#f55959",
+                confirmButtonText: "Play again",
+                closeOnConfirm: false,
+            }, function() {
+                scorenumber = 0;
+                document.getElementById("scorenumber").innerHTML = scorenumber + " | ";
+                number = Math.floor((Math.random() * 3) + 0);
+                swal({
+                    title: "Question",
+                    text: "WHERE IS " + questions[number] + " ?",
+                    confirmButtonColor: "#f55959",
+                    confirmButtonText: "Go map",
+                });
+            });
+        });
     </script>
+    <script src="js/functions.js"></script>
 </body>
 
 </html>
