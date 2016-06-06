@@ -62,4 +62,21 @@ html {
       color: #fff;
       font-family: "Lato", sans-serif; }
 
+#questionbox {
+  border: 2px solid #eaeaea;
+  background-color: #FFF;
+  padding: 10px;
+  position: absolute;
+  z-index: 999999;
+  bottom: 0;
+  margin: 20px;
+  right: 0; }
+  #questionbox span {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: inherit;
+    color: #333;
+    font-family: "Montserrat", sans-serif;
+    text-transform: capitalize; }
+
 /*# sourceMappingURL=style.css.map */

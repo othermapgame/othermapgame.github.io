@@ -22,6 +22,7 @@
             <li>map_game_nature v.0.2</li>
         </ul>
     </div>
+    <div id="questionbox"></div>
     <div class="scorenav">
         <b>Your score: <span id="scorenumber">0 </span><!-- | </span><span id="openmenubutn">open menu</span>--><span id="finishbutn"> | finish game</span></b>
     </div>
@@ -32,8 +33,9 @@
     <script src="node_modules/sweetalert/dist/sweetalert.min.js"></script>
     <script>
         var number = 0;
-        number = Math.floor((Math.random() * 36) + 0);
         var scorenumber = 0;
+        var numbers = [number];
+        var numberquestion = 1;
         var questions = ['THE REDWOOD FORESTS OF CALIFORNIA', 'THE LONGLEAF PINE SAVANNA OF THE SOUTHEASTERN UNITED STATES', 'THE MADREAN PINE-OAK WOODLANDS IN MEXICO AND THE SOUTHWESTERN UNITED STATES ', 'CUBA AND HISPANIOLA',
             'THE AMAZON RIVER BASIN', 'THE GUIANA SHIELD OF GUYANA, SURINAME, AND FRENCH GUIANA', 'THE TEPUIS OF VENEZUELA AND GUYANA', 'THE GREATER MANÚ REGION OF PERU', 'THE CLOUD AND SUMMIT FORESTS OF CENTRAL AMERICA AND THE NORTHERN ANDES',
             'THE PÁRAMOS OF SOUTH AMERICA', 'THE ATLANTIC FORESTS OF SOUTH AMERICA', 'THE CERRADO', 'THE PANTANAL', 'THE GALÁPAGOS', 'BIAŁOWIEŻA FOREST OF POLAND AND BELARUS', 'LAKE BAIKAL OF RUSSIAN SIBERIA',
@@ -48,15 +50,21 @@
             'THE ALTAI MOUNTAINS', 'BORNEO', 'THE WESTERN GHATS OF INDIA', 'BHUTAN', 'MYANMAR', 'SCRUBLANDS OF SOUTHWESTERN AUSTRALIA', 'THE KIMBERLEY REGION OF NORTHWESTERN AUSTRALIA', 'THE GIBBER PLAINS', 'NEW GUINEA', 'NEW CALEDONIA',
             'MCMURDO DRY VALLEYS', 'HAWAII'
         ];
+        var contador = questions.length;
+        number = Math.floor((Math.random() * contador) + 0);
         swal({
             title: "half_earth_game",
-            text: "Answer the questions with the map",
+            text: "Answer 36 questions with the map, good luck!",
             confirmButtonColor: "#f55959",
             confirmButtonText: "Start, right now!",
             closeOnConfirm: false,
         }, function() {
+            document.getElementById("questionbox").innerHTML = "<span>WHERE IS " + questions[number] + " ?</span>";
+            contador--;
+            questions.splice(number, 1);
+            contador = questions.length;
             swal({
-                title: "Question",
+                title: "Question "+numberquestion,
                 text: "WHERE IS " + questions[number] + " ?",
                 confirmButtonColor: "#f55959",
                 confirmButtonText: "Go map",
@@ -69,7 +77,7 @@
                 center: [0, 0],
                 zoom: 3
             });
-            L.tileLayer('http://tile.stamen.com/toner/{z}/{x}/{y}.png', {
+            L.tileLayer('http://tile.stamen.com/toner/{z}/{x}/{y}.png', { /*http://maps.stamen.com/*/
                 attribution: 'Stamen'
             }).addTo(map);
             var popup = L.popup();
@@ -79,7 +87,7 @@
                     type: 'cartodb',
                     sublayers: [{
                         sql: "SELECT * FROM map_game_nature",
-                        cartocss: '#map_game_nature{ marker-fill-opacity: 1; marker-line-color: #FFF; marker-line-width: 1.5; marker-line-opacity: 1; marker-placement: point; marker-type: ellipse; marker-width: 15; marker-fill: #f55959; marker-allow-overlap: true; }',
+                        cartocss: '#map_game_nature{ marker-fill-opacity: 1; marker-line-color: #FFF; marker-line-width: 1.5; marker-line-opacity: 1; marker-placement: point; marker-type: ellipse; marker-width: 20; marker-fill: #f55959; marker-allow-overlap: true; }',
                         interactivity: 'name, the_geom, description'
                     }]
                 })
@@ -98,13 +106,17 @@
                                 confirmButtonText: "Next question",
                                 closeOnConfirm: false,
                             }, function() {
-                                number = Math.floor((Math.random() * 3) + 0);
+                                number = Math.floor((Math.random() * contador) + 0);
+                                document.getElementById("questionbox").innerHTML = "<span>WHERE IS " + questions[number] + " ?</span>";
+                                numberquestion++;
                                 swal({
-                                    title: "Question",
+                                    title: "Question "+numberquestion,
                                     text: "WHERE IS " + questions[number] + " ?",
                                     confirmButtonColor: "#f55959",
                                     confirmButtonText: "Go map",
                                 });
+                                questions.splice(number, 1);
+                                contador = questions.length;
                             });
                         } else {
                             scorenumber--;
@@ -117,13 +129,17 @@
                                 confirmButtonText: "Next question",
                                 closeOnConfirm: false,
                             }, function() {
-                                number = Math.floor((Math.random() * 3) + 0);
+                                number = Math.floor((Math.random() * contador) + 0);
+                                document.getElementById("questionbox").innerHTML = "<span>WHERE IS " + questions[number] + " ?</span>";
+                                numberquestion++;
                                 swal({
-                                    title: "Question",
+                                    title: "Question "+numberquestion,
                                     text: "WHERE IS " + questions[number] + " ?",
                                     confirmButtonColor: "#f55959",
                                     confirmButtonText: "Go map",
                                 });
+                                questions.splice(number, 1);
+                                contador = questions.length;
                             });
                         }
                     });
@@ -147,7 +163,10 @@
             }, function() {
                 scorenumber = 0;
                 document.getElementById("scorenumber").innerHTML = scorenumber + " | ";
-                number = Math.floor((Math.random() * 3) + 0);
+                questions = answer;
+                contador = questions.length;
+                number = Math.floor((Math.random() * contador) + 0);
+                numberquestion=1;
                 swal({
                     title: "Question",
                     text: "WHERE IS " + questions[number] + " ?",
