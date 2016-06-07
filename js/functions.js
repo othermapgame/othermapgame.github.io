@@ -42,21 +42,7 @@ swal({
     });
 });
 
-function getLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
-    } else {
-        x.innerHTML = "Geolocation is not supported by this browser.";
-    }
-}
-
-function showPosition(position) {
-    x.innerHTML = "Latitude: " + position.coords.latitude +
-        "<br>Longitude: " + position.coords.longitude;
-}
-
 function main() {
-  getLocation();
     var map = new L.Map('map', {
         zoomControl: false,
         center: [0, 0],
