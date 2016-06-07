@@ -12,18 +12,20 @@
 </head>
 
 <body>
+    <div id="fb-root"></div>
+    <script>
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "//connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.6&appId=707975622558459";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
     <div id="questionbox"></div>
     <div class="scorenav">
-      <a class="twitter-share-button"
-  href="https://twitter.com/share"
-  data-size="large"
-  data-url="https://dev.twitter.com/web/tweet-button"
-  data-via="twitterdev"
-  data-related="twitterapi,twitter"
-  data-hashtags="example,demo"
-  data-text="custom share text">
-Tweet
-</a>
+        <div class="fb-share-button" data-href="http://othermapgame.github.io/" data-layout="link" data-mobile-iframe="true"></div>
         <b>Your score: <span id="scorenumber">0 </span><!-- | </span><span id="openmenubutn">open menu</span>--><span id="finishbutn"> | finish game</span></b>
     </div>
     <div id="map">
