@@ -98,10 +98,11 @@
     #questionbox {
         text-align: center;
         left: 0;
+        margin-bottom: 40px;
     }
     .scorenav {
         text-align: center;
         left: 0;
-        margin-bottom: 40px;
+
     }
 }
