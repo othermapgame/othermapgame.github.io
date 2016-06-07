@@ -108,29 +108,20 @@ function main() {
                         });
                     } else {
                         scorenumber--;
+                        questions.splice(number, 1);
+                        contador = questions.length;
+                        number = Math.floor((Math.random() * contador) + 0);
+                        document.getElementById("questionbox").innerHTML = "<span>WHERE IS " + questions[number] + " ?</span>";
+                        numberquestion++;
                         swal({
-                            title: "Fail :(",
-                            text: "do not worry, go next!",
-                            type: "error",
+                            title: "Question " + numberquestion,
+                            text: "WHERE IS " + questions[number] + " ?",
                             confirmButtonColor: "#0472b8",
-                            confirmButtonText: "Next question",
-                            closeOnConfirm: false,
-                        }, function() {
-                            questions.splice(number, 1);
-                            contador = questions.length;
-                            number = Math.floor((Math.random() * contador) + 0);
-                            document.getElementById("questionbox").innerHTML = "<span>WHERE IS " + questions[number] + " ?</span>";
-                            numberquestion++;
-                            swal({
-                                title: "Question " + numberquestion,
-                                text: "WHERE IS " + questions[number] + " ?",
-                                confirmButtonColor: "#0472b8",
-                                confirmButtonText: "Go map",
-                            }, function(isConfirm) {
-                                if (isConfirm) {
-                                    $("#questionbox").css("display", "block");
-                                }
-                            });
+                            confirmButtonText: "Go map",
+                        }, function(isConfirm) {
+                            if (isConfirm) {
+                                $("#questionbox").css("display", "block");
+                            }
                         });
                     }
                 }
@@ -139,10 +130,6 @@ function main() {
             cartodb.log.log("some error occurred");
         });
 }
-
-$("#openmenubutn").click(function() {
-    $("#menu").slideToggle("slow", function() {});
-});
 
 $("#finishbutn").click(function() {
     $("#questionbox").css("display", "none");
