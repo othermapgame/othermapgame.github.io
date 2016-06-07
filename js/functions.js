@@ -1,33 +1,38 @@
-var questions = [];
-var answer = [];
-$.getJSON('https://hectoruch.cartodb.com/api/v2/sql?q= SELECT * FROM map_game_nature', function(data) {
-    $.each(data.rows, function(key, val) {
-        questions.push(val.name);
-        answer.push(val.name);
+var questions = []; /*array questions (name)*/
+var answer = []; /*copy of array questions*/
+var correct = []; /*array questions good answered*/
+var fail = []; /*array question bad answered*/
+var number = 0; /*random number for questions, always differente*/
+var scorenumber = 0; /*quantity of good answers*/
+var numberquestion = 1; /*order questions*/
+var contador = /*many questions are complete*/
+
+    /*Get all the information about the map, use cartodb and leaflet*/
+    $.getJSON('https://hectoruch.cartodb.com/api/v2/sql?q= SELECT * FROM map_game_nature', function(data) {
+        $.each(data.rows, function(key, val) {
+            questions.push(val.name);
+            answer.push(val.name);
+        });
     });
-});
-var number = 0;
-var scorenumber = 0;
-var numbers = [number];
-var numberquestion = 1;
-var contador = questions.length;
-number = Math.floor((Math.random() * contador) + 0);
+
+contador = questions.length;
+number = Math.floor((Math.random() * contador) + 0); /*get random number for questions*/
 swal({
-    title: "half_earth_game",
-    text: "Answer questions with the map, good luck!",
+    title: "half_earth_game",/*introduction title*/
+    text: "Answer questions with the map, good luck!",/*introduction description*/
     confirmButtonColor: "#0472b8",
     confirmButtonText: "Start, right now!",
-    closeOnConfirm: false,
+    closeOnConfirm: false,/*when click button, not close, next function*/
 }, function() {
     document.getElementById("questionbox").innerHTML = "<span>WHERE IS " + questions[number] + " ?</span>";
     swal({
-        title: "Question " + numberquestion,
-        text: "WHERE IS " + questions[number] + " ?",
+        title: "Question " + numberquestion,/*question, number*/
+        text: "WHERE IS " + questions[number] + " ?",/*question, name*/
         confirmButtonColor: "#0472b8",
         confirmButtonText: "Go map",
     }, function(isConfirm) {
         if (isConfirm) {
-            $("#questionbox").css("display", "block");
+            $("#questionbox").css("display", "block");/*appear box question with the question, all the users need read two times :)*/
         }
     });
 });
