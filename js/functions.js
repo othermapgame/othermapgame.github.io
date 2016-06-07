@@ -38,7 +38,7 @@ function main() {
         center: [0, 0],
         zoom: 3
     });
-    L.tileLayer('http://tile.stamen.com/toner/{z}/{x}/{y}.png', { /*http://maps.stamen.com/*/
+    L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', { /*http://maps.stamen.com/*/
         attribution: 'Stamen'
     }).addTo(map);
     var popup = L.popup();
