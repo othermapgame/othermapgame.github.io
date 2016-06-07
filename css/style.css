@@ -2,6 +2,7 @@
   map_game_nature
   Style.
 */
+
 @import url(https://fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,700italic,900italic,900|Montserrat:400,700);
 #map, body, html {
     height: 100%;
@@ -113,8 +114,12 @@ body {
     background-color: #EEF3F5;
     border-radius: 4px;
 }
-#openmenu{
-  
+#openmenu {
+    position: absolute;
+    z-index: 999;
+    background: #fff;
+    margin: 20px;
+    padding: 10px;
 }
 .custom-tweet-button {}
 @media (max-width: 768px) {
