@@ -41,6 +41,7 @@ html {
     right: 0;
     margin: 20px;
     border: 2px solid #eaeaea;
+    display: none;
 }
 #openmenubutn {
     cursor: pointer;
@@ -82,6 +83,7 @@ html {
     bottom: 0;
     margin: 20px;
     right: 0;
+    display: none;
     span {
         @include text(500, 18px, inherit, #333, $primaryfont);
         text-transform: capitalize;
@@ -96,6 +98,5 @@ html {
     .scorenav {
         text-align: center;
         left: 0;
-
     }
 }

@@ -85,6 +85,7 @@
     bottom: 0;
     margin: 20px;
     right: 0;
+        display: none;
 }
 #questionbox span {
     font-weight: 500;
