@@ -114,7 +114,6 @@ body {
     border-radius: 4px;
 }
 /*MENU BURGUER*/
-/*http://callmenick.com/post/animating-css-only-hamburger-menu-icons*/
 .c-hamburger {
   display: block;
   position: relative;
@@ -163,51 +162,6 @@ body {
 
 .c-hamburger span::after {
   bottom: -20px;
-}
-.c-hamburger--htx {
-  background-color: #ff3264;
-}
-
-.c-hamburger--htx span {
-  transition: background 0s 0.3s;
-}
-
-.c-hamburger--htx span::before,
-.c-hamburger--htx span::after {
-  transition-duration: 0.3s, 0.3s;
-  transition-delay: 0.3s, 0s;
-}
-
-.c-hamburger--htx span::before {
-  transition-property: top, transform;
-}
-
-.c-hamburger--htx span::after {
-  transition-property: bottom, transform;
-}
-
-/* active state, i.e. menu open */
-.c-hamburger--htx.is-active {
-  background-color: #cb0032;
-}
-
-.c-hamburger--htx.is-active span {
-  background: none;
-}
-
-.c-hamburger--htx.is-active span::before {
-  top: 0;
-  transform: rotate(45deg);
-}
-
-.c-hamburger--htx.is-active span::after {
-  bottom: 0;
-  transform: rotate(-45deg);
-}
-
-.c-hamburger--htx.is-active span::before,
-.c-hamburger--htx.is-active span::after {
-  transition-delay: 0s, 0.3s;
 }
 .custom-tweet-button {}
 @media (max-width: 768px) {
