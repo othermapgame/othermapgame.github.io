@@ -109,6 +109,14 @@ function main() {
                         });
                     } else {
                         scorenumber--;
+                        swal({
+                            title: "Fail :(",
+                            text: "do not worry, go next!",
+                            type: "error",
+                            confirmButtonColor: "#0472b8",
+                            confirmButtonText: "Next question",
+                            closeOnConfirm: false,
+                        }, function() {
                             questions.splice(number, 1);
                             contador = questions.length;
                             number = Math.floor((Math.random() * contador) + 0);
