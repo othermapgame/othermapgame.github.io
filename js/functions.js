@@ -102,7 +102,7 @@ function main() {
                             swal({
                                 title: "Question " + numberquestion,
                                 text: "WHERE IS " + questions[number] + " ?",
-                                confirmButtonColor: "#f55959",
+                                confirmButtonColor: "#0472b8",
                                 confirmButtonText: "Go map",
                             }, function(isConfirm) {
                                 if (isConfirm) {
