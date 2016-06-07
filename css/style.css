@@ -43,7 +43,7 @@ body {
     font-size: 50px;
     line-height: inherit;
     color: #fff;
-    font-family: "Montserrat", sans-serif;
+    /*font-family: "Montserrat", sans-serif;*/
 }
 #menu p {
     color: #FFF;
@@ -82,7 +82,7 @@ body {
     font-size: 18px;
     line-height: inherit;
     color: #333;
-    font-family: "Montserrat", sans-serif;
+    /*font-family: "Montserrat", sans-serif;*/
     text-transform: capitalize;
 }
 .custom-tweet-button {}
