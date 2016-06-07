@@ -15,7 +15,7 @@ number = Math.floor((Math.random() * contador) + 0);
 swal({
     title: "half_earth_game",
     text: "Answer questions with the map, good luck!",
-    confirmButtonColor: "#f55959",
+    confirmButtonColor: "#0472b8",
     confirmButtonText: "Start, right now!",
     closeOnConfirm: false,
 }, function() {
@@ -23,7 +23,7 @@ swal({
     swal({
         title: "Question " + numberquestion,
         text: "WHERE IS " + questions[number] + " ?",
-        confirmButtonColor: "#f55959",
+        confirmButtonColor: "#0472b8",
         confirmButtonText: "Go map",
     }, function(isConfirm) {
         if (isConfirm) {
@@ -61,12 +61,11 @@ function main() {
                     swal({
                         title: "Your score is",
                         text: scorenumber,
-                        confirmButtonColor: "#f55959",
+                        confirmButtonColor: "#0472b8",
                         confirmButtonText: "Play again",
                         closeOnConfirm: false,
                     }, function() {
                         scorenumber = 0;
-                        document.getElementById("scorenumber").innerHTML = scorenumber + " | ";
                         questions = answer;
                         contador = questions.length;
                         number = Math.floor((Math.random() * contador) + 0);
@@ -75,19 +74,18 @@ function main() {
                         swal({
                             title: "Question",
                             text: "WHERE IS " + questions[number] + " ?",
-                            confirmButtonColor: "#f55959",
+                            confirmButtonColor: "#0472b8",
                             confirmButtonText: "Go map",
                         });
                     });
                 } else {
                     if (questions[number] == data.name) {
                         scorenumber++;
-                        document.getElementById("scorenumber").innerHTML = scorenumber + " ";
                         swal({
                             title: "Great :)",
                             text: data.description,
                             type: "success",
-                            confirmButtonColor: "#f55959",
+                            confirmButtonColor: "#0472b8",
                             confirmButtonText: "Next question",
                             closeOnConfirm: false,
                         }, function() {
@@ -109,12 +107,11 @@ function main() {
                         });
                     } else {
                         scorenumber--;
-                        document.getElementById("scorenumber").innerHTML = scorenumber + " ";
                         swal({
                             title: "Fail :(",
                             text: "do not worry, go next!",
                             type: "error",
-                            confirmButtonColor: "#f55959",
+                            confirmButtonColor: "#0472b8",
                             confirmButtonText: "Next question",
                             closeOnConfirm: false,
                         }, function() {
@@ -126,7 +123,7 @@ function main() {
                             swal({
                                 title: "Question " + numberquestion,
                                 text: "WHERE IS " + questions[number] + " ?",
-                                confirmButtonColor: "#f55959",
+                                confirmButtonColor: "#0472b8",
                                 confirmButtonText: "Go map",
                             }, function(isConfirm) {
                                 if (isConfirm) {
@@ -143,7 +140,6 @@ function main() {
 }
 
 $("#openmenubutn").click(function() {
-    $("#scorenav").css("display", "none");
     $("#menu").slideToggle("slow", function() {});
 });
 
@@ -158,7 +154,6 @@ $("#finishbutn").click(function() {
         closeOnConfirm: false,
     }, function() {
         scorenumber = 0;
-        document.getElementById("scorenumber").innerHTML = scorenumber + " | ";
         questions = answer;
         contador = questions.length;
         number = Math.floor((Math.random() * contador) + 0);
@@ -167,7 +162,7 @@ $("#finishbutn").click(function() {
         swal({
             title: "Question",
             text: "WHERE IS " + questions[number] + " ?",
-            confirmButtonColor: "#f55959",
+            confirmButtonColor: "#0472b8",
             confirmButtonText: "Go map",
         }, function(isConfirm) {
             if (isConfirm) {
