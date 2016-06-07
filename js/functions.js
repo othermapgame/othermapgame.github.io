@@ -131,7 +131,6 @@ function main() {
 }
 
 $("#finishbutn").click(function() {
-    $("#questionbox").css("display", "none");
     swal({
         title: "Are you sure?",
         text: "You will lose all your progress",
@@ -144,6 +143,7 @@ $("#finishbutn").click(function() {
         closeOnCancel: false
     }, function(isConfirm) {
         if (isConfirm) {
+            $("#questionbox").css("display", "none");
             swal({
                 title: "Your score is",
                 text: scorenumber,
