@@ -95,7 +95,7 @@
     font-family: "Montserrat", sans-serif;
     text-transform: capitalize;
 }
-@media (max-width: 500px) {
+@media (max-width: 768px) {
     #questionbox {
         text-align: center;
         left: 0;
