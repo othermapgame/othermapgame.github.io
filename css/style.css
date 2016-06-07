@@ -2,27 +2,17 @@
   map_game_nature
   Style.
 */
-
-
-/*MIXINS*/
-
-
-/*BREAK POINTS*/
-
-
-/*COLORS*/
-
-
-/*FONTS*/
-
 @import url(https://fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,700italic,900italic,900|Montserrat:400,700);
-
-/*ID*/
 
 #map, body, html {
     height: 100%;
     padding: 0;
     margin: 0;
+}
+body {
+    font-family: 'Pier Sans';
+    color: #222;
+    -webkit-font-smoothing: antialiased;
 }
 .scorenav {
     position: absolute;
@@ -85,7 +75,7 @@
     bottom: 0;
     margin: 20px;
     right: 0;
-        display: none;
+    display: none;
 }
 #questionbox span {
     font-weight: 500;
@@ -95,9 +85,7 @@
     font-family: "Montserrat", sans-serif;
     text-transform: capitalize;
 }
-.custom-tweet-button{
-  
-}
+.custom-tweet-button {}
 @media (max-width: 768px) {
     #questionbox {
         text-align: center;
@@ -107,6 +95,5 @@
     .scorenav {
         text-align: center;
         left: 0;
-
     }
 }
