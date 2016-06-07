@@ -107,7 +107,6 @@ function main() {
                             }
                         });
                     } else {
-                        scorenumber--;
                         questions.splice(number, 1);
                         contador = questions.length;
                         number = Math.floor((Math.random() * contador) + 0);
