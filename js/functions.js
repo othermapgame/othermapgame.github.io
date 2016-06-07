@@ -91,7 +91,9 @@ function main() {
                 } else {
                     if (questions[number] == data.name) {
                         scorenumber++;
+                        correct.push(questions[number]);
                         questions.splice(number, 1);
+                        console.log(correct);
                         contador = questions.length;
                         number = Math.floor((Math.random() * contador) + 0);
                         document.getElementById("questionbox").innerHTML = "<span>WHERE IS " + questions[number] + " ?</span>";
@@ -107,6 +109,8 @@ function main() {
                             }
                         });
                     } else {
+                        fail.push(questions[number]);
+                        console.log(fail);
                         questions.splice(number, 1);
                         contador = questions.length;
                         number = Math.floor((Math.random() * contador) + 0);
