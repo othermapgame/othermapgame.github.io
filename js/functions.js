@@ -91,6 +91,14 @@ function main() {
                 } else {
                     if (questions[number] == data.name) {
                         scorenumber++;
+                        swal({
+                            title: "Great :)",
+                            text: data.description,
+                            type: "success",
+                            confirmButtonColor: "#0472b8",
+                            confirmButtonText: "Next question",
+                            closeOnConfirm: false,
+                        }, function() {
                             questions.splice(number, 1);
                             contador = questions.length;
                             number = Math.floor((Math.random() * contador) + 0);
