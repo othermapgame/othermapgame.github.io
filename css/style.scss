@@ -10,6 +10,10 @@
     color: $color;
     font-family: $fontfamily;
 }
+/*BREAK POINTS*/
+$break-small: 500px;
+$break-middle: 900px;
+$break-large: 1200px;
 /*COLORS*/
 $primarycolor: #f55959;
 $secondarycolor: #8CD4F5;
@@ -81,5 +85,14 @@ html {
     span {
         @include text(500, 18px, inherit, #333, $primaryfont);
         text-transform: capitalize;
+    }
+}
+@media (max-width: 500px) {
+    #questionbox {
+      width: 100%;
+      margin: 10px auto;
+      text-align: center;
+      float: none;
+      border: 0px;
     }
 }

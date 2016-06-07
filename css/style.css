@@ -2,48 +2,60 @@
   map_game_nature
   Style.
 */
+
+
 /*MIXINS*/
+
+
+/*BREAK POINTS*/
+
+
 /*COLORS*/
+
+
 /*FONTS*/
+
 @import url(https://fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,700italic,900italic,900|Montserrat:400,700);
+
 /*ID*/
-#map,
-body,
-html {
-  height: 100%;
-  padding: 0;
-  margin: 0; }
 
+#map, body, html {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
 .scorenav {
-  position: absolute;
-  z-index: 99999;
-  background: #FFF;
-  padding: 20px;
-  right: 0;
-  margin: 20px;
-  border: 2px solid #eaeaea; }
-
+    position: absolute;
+    z-index: 99999;
+    background: #FFF;
+    padding: 20px;
+    right: 0;
+    margin: 20px;
+    border: 2px solid #eaeaea;
+}
 #openmenubutn {
-  cursor: pointer; }
-
+    cursor: pointer;
+}
 #finishbutn {
-  cursor: pointer; }
-
+    cursor: pointer;
+}
 #menu {
-  height: 100%;
-  position: absolute;
-  background-color: #8CD4F5;
-  z-index: 99999;
-  width: 100%;
-  display: none; }
-  #menu h1 {
+    height: 100%;
+    position: absolute;
+    background-color: #8CD4F5;
+    z-index: 99999;
+    width: 100%;
+    display: none;
+}
+#menu h1 {
     padding: 40px;
     font-weight: 500;
     font-size: 50px;
     line-height: inherit;
     color: #fff;
-    font-family: "Montserrat", sans-serif; }
-  #menu p {
+    font-family: "Montserrat", sans-serif;
+}
+#menu p {
     color: #FFF;
     font-weight: 500;
     font-size: 25px;
@@ -52,31 +64,42 @@ html {
     font-family: "Lato", sans-serif;
     padding-left: 40px;
     padding-right: 400px;
-    margin-top: -20px; }
-  #menu ul {
-    list-style: none; }
-    #menu ul li {
-      font-weight: 500;
-      font-size: 25px;
-      line-height: 72px;
-      color: #fff;
-      font-family: "Lato", sans-serif; }
-
+    margin-top: -20px;
+}
+#menu ul {
+    list-style: none;
+}
+#menu ul li {
+    font-weight: 500;
+    font-size: 25px;
+    line-height: 72px;
+    color: #fff;
+    font-family: "Lato", sans-serif;
+}
 #questionbox {
-  border: 2px solid #eaeaea;
-  background-color: #FFF;
-  padding: 10px;
-  position: absolute;
-  z-index: 999999;
-  bottom: 0;
-  margin: 20px;
-  right: 0; }
-  #questionbox span {
+    border: 2px solid #eaeaea;
+    background-color: #FFF;
+    padding: 10px;
+    position: absolute;
+    z-index: 999999;
+    bottom: 0;
+    margin: 20px;
+    right: 0;
+}
+#questionbox span {
     font-weight: 500;
     font-size: 18px;
     line-height: inherit;
     color: #333;
     font-family: "Montserrat", sans-serif;
-    text-transform: capitalize; }
-
-/*# sourceMappingURL=style.css.map */
+    text-transform: capitalize;
+}
+@media (max-width: 500px) {
+    #questionbox {
+      width: 100%;
+      margin: 10px auto;
+      text-align: center;
+      float: none;
+      border: 0px;
+    }
+}
