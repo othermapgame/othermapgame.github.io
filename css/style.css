@@ -120,6 +120,7 @@ body {
     background: #fff;
     margin: 20px;
     padding: 10px;
+    font-family: "Montserrat", sans-serif;
 }
 .custom-tweet-button {}
 @media (max-width: 768px) {

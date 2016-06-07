@@ -179,10 +179,10 @@ $("#finishbutn").click(function() {
 
 function opendash(){
   $(".sideBar").css("top","0px");
-  $("#questionbox").attr("onClick","closedash()");
+  $("#openmenu").attr("onClick","closedash()");
 }
 
 function closedash(){
   $(".sideBar").css("top","-610px");
-  $("#questionbox").attr("onClick","opendash()");
+  $("#openmenu").attr("onClick","opendash()");
 }
