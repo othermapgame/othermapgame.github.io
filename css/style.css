@@ -95,6 +95,9 @@
     font-family: "Montserrat", sans-serif;
     text-transform: capitalize;
 }
+.custom-tweet-button{
+  
+}
 @media (max-width: 768px) {
     #questionbox {
         text-align: center;
