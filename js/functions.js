@@ -178,5 +178,5 @@ $("#finishbutn").click(function() {
 });
 
 function opendash(){
-  $(".sidebar").css("height","100%");
+  $(".sidebar").css("top","0px");
 }
