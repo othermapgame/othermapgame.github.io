@@ -12,16 +12,6 @@
 </head>
 
 <body>
-    <div id="menu">
-        <h1>What is half_earth_game?</h1>
-        <p>The graphic designer’s first fucking consideration is always the size and shape of the format, whether for the printed page or for digital display. Think about all the fucking possibilities. Sometimes it is appropriate to place various typographic
-            elements on the outside of the fucking left margin of text to maintain a strong vertical axis.</p>
-        <ul>
-            <li>Contact</li>
-            <li>Go github</li>
-            <li>map_game_nature v.0.2</li>
-        </ul>
-    </div>
     <div id="questionbox"></div>
     <div class="scorenav">
         <b>Your score: <span id="scorenumber">0 </span><!-- | </span><span id="openmenubutn">open menu</span>--><span id="finishbutn"> | finish game</span></b>
@@ -48,7 +38,7 @@
         number = Math.floor((Math.random() * contador) + 0);
         swal({
             title: "half_earth_game",
-            text: "Answer " + contador + " questions with the map, good luck!",
+            text: "Answer questions with the map, good luck!",
             confirmButtonColor: "#f55959",
             confirmButtonText: "Start, right now!",
             closeOnConfirm: false,
@@ -90,7 +80,7 @@
                 .done(function(layer) {
                     layer.setInteraction(true);
                     layer.on('featureClick', function(e, latlng, pos, data) {
-                      $("#questionbox").css("display", "none");
+                        $("#questionbox").css("display", "none");
                         if (questions.length == 1) {
                             swal({
                                 title: "Your score is",
@@ -182,6 +172,7 @@
         });
 
         $("#finishbutn").click(function() {
+            $("#questionbox").css("display", "none");
             swal({
                 title: "Your score is",
                 text: scorenumber,
@@ -202,6 +193,10 @@
                     text: "WHERE IS " + questions[number] + " ?",
                     confirmButtonColor: "#f55959",
                     confirmButtonText: "Go map",
+                }, function(isConfirm) {
+                    if (isConfirm) {
+                        $("#questionbox").css("display", "block");
+                    }
                 });
             });
         });
