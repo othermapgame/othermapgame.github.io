@@ -178,5 +178,6 @@ $("#finishbutn").click(function() {
 });
 
 function opendash(){
+  alert("d");
   $(".sidebar").css("top","0px");
 }
