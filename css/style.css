@@ -104,8 +104,10 @@ body {
 .sideBar__item {
     cursor: pointer;
     padding: 5px 10px;
-    color: #16A2D7;
-    font-size: 12px;
+    color: #0473b9;
+    font-size: 18px;
+    line-height: 32px;
+    font-family: "Montserrat", sans-serif;
 }
 .sideBar__item.is-side-bar-item-selected {
     background-color: #EEF3F5;
