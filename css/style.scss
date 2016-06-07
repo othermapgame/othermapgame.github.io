@@ -87,7 +87,6 @@ html {
         text-transform: capitalize;
     }
 }
-
 @media (max-width: 500px) {
     #questionbox {
         text-align: center;
@@ -96,5 +95,6 @@ html {
     .scorenav {
         text-align: center;
         left: 0;
+        margin-bottom: 40px;
     }
 }
