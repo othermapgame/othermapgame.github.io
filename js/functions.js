@@ -161,8 +161,8 @@ $("#finishbutn").click(function() {
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#DD6B55",
-        confirmButtonText: "Yes I want start again!",
-        cancelButtonText: "No, cancel please!",
+        confirmButtonText: "Yes!",
+        cancelButtonText: "No!",
         closeOnConfirm: false,
         closeOnCancel: false
     }, function(isConfirm) {
