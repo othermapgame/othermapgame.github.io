@@ -24,13 +24,14 @@
             if (d.getElementById(id)) return;
             js = d.createElement(s);
             js.id = id;
-            js.src = "//connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.6&appId=707975622558459";
+            js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1";
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
     </script>
     <div id="questionbox"></div>
     <div class="scorenav">
-        <div class="fb-share-button" data-href="http://othermapgame.github.io/" data-layout="link" data-mobile-iframe="true"></div>
+        <div class="fb-share-button" data-href="http://othermapgame.github.io/" data-layout="button_count">
+        </div>
         <b>Your score: <span id="scorenumber">0 </span><!-- | </span><span id="openmenubutn">open menu</span>--><span id="finishbutn"> | finish game</span></b>
     </div>
     <div id="map">
