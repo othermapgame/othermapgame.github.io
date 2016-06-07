@@ -92,8 +92,9 @@ body {
     position: absolute;
     top: 0;
     left: 20px;
-    width: 280px;
-    max-height: calc(100% - 20px);
+    width: 300px;
+    height: 100%;
+    max-height: 500px;
     overflow: scroll;
     -webkit-overflow-scrolling: touch;
     padding: 85px 20px 20px 30px;
