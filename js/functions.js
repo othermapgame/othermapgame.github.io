@@ -176,3 +176,7 @@ $("#finishbutn").click(function() {
         });
     });
 });
+
+function opendash(){
+  $(".sidebar").css("height","100%");
+}
