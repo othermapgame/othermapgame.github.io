@@ -91,29 +91,20 @@ function main() {
                 } else {
                     if (questions[number] == data.name) {
                         scorenumber++;
+                        questions.splice(number, 1);
+                        contador = questions.length;
+                        number = Math.floor((Math.random() * contador) + 0);
+                        document.getElementById("questionbox").innerHTML = "<span>WHERE IS " + questions[number] + " ?</span>";
+                        numberquestion++;
                         swal({
-                            title: "Great :)",
-                            text: data.description,
-                            type: "success",
+                            title: "Question " + numberquestion,
+                            text: "WHERE IS " + questions[number] + " ?",
                             confirmButtonColor: "#0472b8",
-                            confirmButtonText: "Next question",
-                            closeOnConfirm: false,
-                        }, function() {
-                            questions.splice(number, 1);
-                            contador = questions.length;
-                            number = Math.floor((Math.random() * contador) + 0);
-                            document.getElementById("questionbox").innerHTML = "<span>WHERE IS " + questions[number] + " ?</span>";
-                            numberquestion++;
-                            swal({
-                                title: "Question " + numberquestion,
-                                text: "WHERE IS " + questions[number] + " ?",
-                                confirmButtonColor: "#0472b8",
-                                confirmButtonText: "Go map",
-                            }, function(isConfirm) {
-                                if (isConfirm) {
-                                    $("#questionbox").css("display", "block");
-                                }
-                            });
+                            confirmButtonText: "Go map",
+                        }, function(isConfirm) {
+                            if (isConfirm) {
+                                $("#questionbox").css("display", "block");
+                            }
                         });
                     } else {
                         scorenumber--;
