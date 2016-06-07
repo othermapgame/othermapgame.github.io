@@ -116,11 +116,12 @@ body {
 }
 #openmenu {
     position: absolute;
-    z-index: 999;
+    z-index: 999999;
     background: #fff;
     margin: 20px;
     padding: 10px;
     font-family: "Montserrat", sans-serif;
+    padding-left: 30px; 
 }
 .custom-tweet-button {}
 @media (max-width: 768px) {
