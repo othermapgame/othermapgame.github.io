@@ -167,7 +167,26 @@ $("#finishbutn").click(function() {
         closeOnCancel: false
     }, function(isConfirm) {
         if (isConfirm) {
-            swal("Deleted!", "Your imaginary file has been deleted.", "success");
+            swal({
+                title: "Your score is",
+                text: scorenumber,
+                confirmButtonColor: "#0472b8",
+                confirmButtonText: "Play again",
+                closeOnConfirm: false,
+            }, function() {
+                scorenumber = 0;
+                questions = answer;
+                contador = questions.length;
+                number = Math.floor((Math.random() * contador) + 0);
+                document.getElementById("questionbox").innerHTML = "<span>WHERE IS " + questions[number] + " ?</span>";
+                numberquestion = 1;
+                swal({
+                    title: "Question",
+                    text: "WHERE IS " + questions[number] + " ?",
+                    confirmButtonColor: "#0472b8",
+                    confirmButtonText: "Go map",
+                });
+            });
         } else {
             swal("Cancelled", "Your game is save", "error");
         }
