@@ -18,21 +18,26 @@ var contador = /*many questions are complete*/
 contador = questions.length;
 number = Math.floor((Math.random() * contador) + 0); /*get random number for questions*/
 swal({
-    title: "half_earth_game",/*introduction title*/
-    text: "Answer questions with the map, good luck!",/*introduction description*/
+    title: "half_earth_game",
+    /*introduction title*/
+    text: "Answer questions with the map, good luck!",
+    /*introduction description*/
     confirmButtonColor: "#0472b8",
     confirmButtonText: "Start, right now!",
-    closeOnConfirm: false,/*when click button, not close, next function*/
+    closeOnConfirm: false,
+    /*when click button, not close, next function*/
 }, function() {
     document.getElementById("questionbox").innerHTML = "<span>WHERE IS " + questions[number] + " ?</span>";
     swal({
-        title: "Question " + numberquestion,/*question, number*/
-        text: "WHERE IS " + questions[number] + " ?",/*question, name*/
+        title: "Question " + numberquestion,
+        /*question, number*/
+        text: "WHERE IS " + questions[number] + " ?",
+        /*question, name*/
         confirmButtonColor: "#0472b8",
         confirmButtonText: "Go map",
     }, function(isConfirm) {
         if (isConfirm) {
-            $("#questionbox").css("display", "block");/*appear box question with the question, all the users need read two times :)*/
+            $("#questionbox").css("display", "block"); /*appear box question with the question, all the users need read two times :)*/
         }
     });
 });
@@ -151,40 +156,32 @@ $("#openmenubutn").click(function() {
 $("#finishbutn").click(function() {
     $("#questionbox").css("display", "none");
     swal({
-        title: "Your score is",
-        text: scorenumber /*+'<br><div class="custom-tweet-button"><a href="https://twitter.com/intent/tweet?url=http://othermapgame.github.io/&amp;text=I play MapGame and I get '+scorenumber+' points" target="_blank" alt="Tweet this pen"><i class="btn-icon"></i><span class="btn-text">Tweet</span></a></div>'*/ ,
-        confirmButtonColor: "#f55959",
-        html: true,
-        confirmButtonText: "Play again",
+        title: "Are you sure?",
+        text: "You will not be able to recover this imaginary file!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel plx!",
         closeOnConfirm: false,
-    }, function() {
-        scorenumber = 0;
-        questions = answer;
-        contador = questions.length;
-        number = Math.floor((Math.random() * contador) + 0);
-        document.getElementById("questionbox").innerHTML = "<span>WHERE IS " + questions[number] + " ?</span>";
-        numberquestion = 1;
-        swal({
-            title: "Question",
-            text: "WHERE IS " + questions[number] + " ?",
-            confirmButtonColor: "#0472b8",
-            confirmButtonText: "Go map",
-        }, function(isConfirm) {
-            if (isConfirm) {
-                $("#questionbox").css("display", "block");
-            }
-        });
+        closeOnCancel: false
+    }, function(isConfirm) {
+        if (isConfirm) {
+            swal("Deleted!", "Your imaginary file has been deleted.", "success");
+        } else {
+            swal("Cancelled", "Your imaginary file is safe :)", "error");
+        }
     });
 });
 
-function opendash(){
-  $(".sideBar").css("top","0px");
-  $("#openmenu").html("Close menu");
-  $("#openmenu").attr("onClick","closedash()");
+function opendash() {
+    $(".sideBar").css("top", "0px");
+    $("#openmenu").html("Close menu");
+    $("#openmenu").attr("onClick", "closedash()");
 }
 
-function closedash(){
-  $(".sideBar").css("top","-610px");
+function closedash() {
+    $(".sideBar").css("top", "-610px");
     $("#openmenu").html("Open menu");
-  $("#openmenu").attr("onClick","opendash()");
+    $("#openmenu").attr("onClick", "opendash()");
 }
