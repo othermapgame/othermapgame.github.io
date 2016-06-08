@@ -134,7 +134,7 @@ function main() {
         });
 }
 
-$("#finishbutn").click(function() {
+function finishgame() {
     swal({
         title: "Are you sure?",
         text: "You will lose all your progress",
