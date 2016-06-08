@@ -86,7 +86,6 @@ swal({
 });
 
 function main() {
-  detectUserLocation();
     if (startmap == false) {
         fail = [];
         correct = [];
