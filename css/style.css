@@ -100,7 +100,7 @@ body {
     -webkit-overflow-scrolling: touch;
     padding: 85px 20px 20px 30px;
     background-color: #fff;
-    z-index: 9999;
+    z-index: 8;
 }
 .sideBar__item {
     cursor: pointer;
@@ -116,7 +116,7 @@ body {
 }
 #openmenu {
     position: absolute;
-    z-index: 999999;
+    z-index: 9;
     background: #fff;
     margin: 20px;
     padding: 10px;
