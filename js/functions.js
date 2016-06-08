@@ -21,7 +21,7 @@ $.getJSON('https://hectoruch.cartodb.com/api/v2/sql?q= SELECT * FROM map_game_na
     });
 });
 
-https://hectoruch.cartodb.com/api/v2/sql?q=INSERT INTO user_half_earth_game (correctanswer,failanswer,points) VALUES (12,'value2','value3')&api_key=be1f15570e60388973be3cb08edb426e8df1dfbf
+$('https://hectoruch.cartodb.com/api/v2/sql?q=INSERT INTO user_half_earth_game (correctanswer,failanswer,points) VALUES (12,'value2','value3')&api_key=be1f15570e60388973be3cb08edb426e8df1dfbf');
 
 
 var sql = new cartodb.SQL({
