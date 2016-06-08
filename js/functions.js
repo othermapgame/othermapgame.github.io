@@ -146,7 +146,7 @@ function main() {
             layer.on('featureClick', function(e, latlng, pos, data) {
                 $("#questionbox").css("display", "none");
 
-                if (idquestions.length == 1) {
+                if (idquestion.length == 1) {
                     swal({
                         title: "Are you sure?",
                         text: "You will lose all your progress",
