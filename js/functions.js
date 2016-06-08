@@ -9,6 +9,7 @@ var scorenumber = 0; /*quantity of good answers*/
 var numberquestion = 1; /*order questions*/
 var contador = 0;/*many questions are complete*/
 var startmap = false;
+var map = "";
 
     /*Get all the information about the map, use cartodb and leaflet*/
     $.getJSON('https://hectoruch.cartodb.com/api/v2/sql?q= SELECT * FROM map_game_nature', function(data) {
@@ -56,7 +57,7 @@ function main() {
   startmap = true;
   $("#finishbutn").attr("onClick", "finishgame()");
   $("#finishbutn").html("Finish game");
-    var map = new L.Map('map', {
+    map = new L.Map('map', {
         zoomControl: false,
         center: [0, 0],
         zoom: 3
@@ -236,7 +237,7 @@ function finishgame() {
 
 function showmapresultall() {
     $("body").append("<div id='map'></div>");
-    var map = new L.Map('map', {
+    map = new L.Map('map', {
         zoomControl: false,
         center: [0, 0],
         zoom: 3
@@ -283,7 +284,7 @@ function showmapresultall() {
 
 function showmapresultfail() {
     $("body").append("<div id='map'></div>");
-    var map = new L.Map('map', {
+    map = new L.Map('map', {
         zoomControl: false,
         center: [0, 0],
         zoom: 3
@@ -328,7 +329,7 @@ function showmapresultfail() {
 
 function showmapresultcorrect() {
     $("body").append("<div id='map'></div>");
-    var map = new L.Map('map', {
+    map = new L.Map('map', {
         zoomControl: false,
         center: [0, 0],
         zoom: 3
@@ -336,7 +337,6 @@ function showmapresultcorrect() {
     L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', { /*http://maps.stamen.com/*/
         attribution: 'Stamen'
     }).addTo(map);
-    var popup = L.popup();
     cartodb.createLayer(map, {
             user_name: 'hectoruch',
             type: 'cartodb',
