@@ -349,7 +349,7 @@ function showmapresultcorrect() {
                     closeOnConfirm: true,
                     closeOnCancel: true
                 }, function(isConfirm) {
-                    if (isConfirm) {} else {
+                    if (isConfirm) {} else { 
                         window.open(data.moreinfo, '_blank');
                     }
                 });
