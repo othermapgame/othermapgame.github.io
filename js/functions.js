@@ -21,6 +21,9 @@ $.getJSON('https://hectoruch.cartodb.com/api/v2/sql?q= SELECT * FROM map_game_na
     });
 });
 
+$.getJSON("https: //hectoruch.cartodb.com/api/v2/sql?q= INSERT INTO user_half_earth_game (correctanswer,failanswer,points) VALUES (12,'value2','value3')&api_key={api_key}", function(data) {
+});
+
 contador = questions.length;
 number = Math.floor((Math.random() * contador) + 0); /*get random number for questions*/
 swal({
