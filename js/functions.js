@@ -20,6 +20,8 @@ $.getJSON('https://hectoruch.cartodb.com/api/v2/sql?q= SELECT * FROM map_game_na
         idanswer.push(val.cartodb_id);
     });
 });
+console.log(idquestion.length);
+console.log(questions.length);
 
 https://hectoruch.cartodb.com/api/v2/sql?q=INSERT INTO user_half_earth_game (correctanswer,failanswer,points) VALUES (12,'value2','value3')&api_key=be1f15570e60388973be3cb08edb426e8df1dfbf
 
@@ -145,7 +147,6 @@ function main() {
             layer.setInteraction(true);
             layer.on('featureClick', function(e, latlng, pos, data) {
                 $("#questionbox").css("display", "none");
-                console.log(idquestion.length);
                 if (idquestion.length == 1) {
                     swal({
                         title: "Are you sure?",
