@@ -91,7 +91,7 @@ function main() {
                 } else {
                     if (questions[number] == data.name) {
                         scorenumber++;
-                        correct.push(questions[number]);
+                        correct.push(number);
                         questions.splice(number, 1);
                         console.log(correct);
                         contador = questions.length;
@@ -109,7 +109,7 @@ function main() {
                             }
                         });
                     } else {
-                        fail.push(questions[number]);
+                        fail.push(number);
                         console.log(fail);
                         questions.splice(number, 1);
                         contador = questions.length;
