@@ -203,7 +203,6 @@ function showmapresultall() {
     L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', { /*http://maps.stamen.com/*/
         attribution: 'Stamen'
     }).addTo(map);
-    var popup = L.popup();
     cartodb.createLayer(map, {
             user_name: 'hectoruch',
             type: 'cartodb',
@@ -265,6 +264,23 @@ function showmapresultfail() {
         .addTo(map)
         .done(function(layer) {
             layer.setInteraction(true);
+            layer.on('featureClick', function(e, latlng, pos, data) {
+                swal({
+                    title: data.name,
+                    text: data.description,
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Return map",
+                    cancelButtonText: "Know more",
+                    closeOnConfirm: true,
+                    closeOnCancel: false
+                }, function(isConfirm) {
+                    if (isConfirm) {
+                    } else {
+                        swal("Cancelled", "Your game is save", "error");
+                    }
+                });
+            });
         }).on('error', function() {
             cartodb.log.log("some error occurred");
         });
@@ -294,6 +310,23 @@ function showmapresultcorrect() {
         .addTo(map)
         .done(function(layer) {
             layer.setInteraction(true);
+            layer.on('featureClick', function(e, latlng, pos, data) {
+                swal({
+                    title: data.name,
+                    text: data.description,
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Return map",
+                    cancelButtonText: "Know more",
+                    closeOnConfirm: true,
+                    closeOnCancel: false
+                }, function(isConfirm) {
+                    if (isConfirm) {
+                    } else {
+                        swal("Cancelled", "Your game is save", "error");
+                    }
+                });
+            });
         }).on('error', function() {
             cartodb.log.log("some error occurred");
         });
