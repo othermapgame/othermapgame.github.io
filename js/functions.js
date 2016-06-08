@@ -47,6 +47,7 @@ swal({
 });
 
 function main() {
+  map.remove();
   $("#finishbutn").attr("onClick", "finishgame()");
   $("finishbutn").html("Finish game");
     var map = new L.Map('map', {
