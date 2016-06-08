@@ -24,13 +24,7 @@ $.getJSON('https://hectoruch.cartodb.com/api/v2/sql?q= SELECT * FROM map_game_na
 var sql = cartodb.SQL({
     user: 'hectoruch'
 });
-sql.execute("INSERT INTO user_half_earth_game (correctanswer,failanswer,points) VALUES (12,'value2','value3')")
-    .done(function(data) {
-        console.log("guarde tus datos :D");
-    })
-    .error(function(errors) {
-        console.log("no guarde tus datos :S");
-    })
+sql.execute("INSERT INTO user_half_earth_game (correctanswer,failanswer,points) VALUES (12,'value2','value3')");
 
 
 contador = questions.length;
