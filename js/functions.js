@@ -12,12 +12,15 @@ var startmap = false;
 var map = "";
 
 /*Get all the information about the map, use cartodb and leaflet*/
-$.getJSON('https://hectoruch.cartodb.com/api/v2/sql?q= SELECT * FROM map_game_nature', function(data) {
+$.getJSON('https://hectoruch.cartodb.com/api/v2/sql?q= SELECT * FROM map_game_nature LIMIT 32', function(data) {
     $.each(data.rows, function(key, val) {
         questions.push(val.name);
         answer.push(val.name);
+        idquestion.push(val.cartodb_id);
+        idanswer.push(val.cartodb_id);
     });
 });
+
 
 contador = questions.length;
 number = Math.floor((Math.random() * contador) + 0); /*get random number for questions*/
@@ -159,6 +162,7 @@ function main() {
                 } else {
                   console.log(idquestion.length);
                   console.log(questions.length);
+                  console.log(questions);
                     if (questions[number] == data.name) {
                         scorenumber++;
                         correct.push(idquestion[number]);
