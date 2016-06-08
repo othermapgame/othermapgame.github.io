@@ -319,11 +319,11 @@ function showmapresultcorrect() {
                     confirmButtonText: "Return map",
                     cancelButtonText: "Know more",
                     closeOnConfirm: true,
-                    closeOnCancel: false
+                    closeOnCancel: true
                 }, function(isConfirm) {
                     if (isConfirm) {
                     } else {
-                        swal("Cancelled", "Your game is save", "error");
+                        window.open(data.moreinfo,'_blank');
                     }
                 });
             });
