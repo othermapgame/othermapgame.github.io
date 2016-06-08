@@ -10,8 +10,8 @@ var contador = /*many questions are complete*/
     /*Get all the information about the map, use cartodb and leaflet*/
     $.getJSON('https://hectoruch.cartodb.com/api/v2/sql?q= SELECT * FROM map_game_nature', function(data) {
         $.each(data.rows, function(key, val) {
-            questions.push(val.name);
-            answer.push(val.name);
+            questions.push(val.cartodb_id);
+            answer.push(val.cartodb_id);
         });
     });
 
@@ -89,7 +89,7 @@ function main() {
                         });
                     });
                 } else {
-                    if (questions[number] == data.name) {
+                    if (questions[number] == data.cartodb_id) {
                         scorenumber++;
                         correct.push(number);
                         questions.splice(number, 1);
