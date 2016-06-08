@@ -192,7 +192,7 @@ function showmapresult(){
           user_name: 'hectoruch',
           type: 'cartodb',
           sublayers: [{
-              sql: "SELECT * FROM map_game_nature",
+              sql: "SELECT * FROM map_game_nature WHERE cartodb_id IN ("+fail+")",
               cartocss: '#map_game_nature{ marker-fill-opacity: 1; marker-line-color: #FFF; marker-line-width: 1.5; marker-line-opacity: 1; marker-placement: point; marker-type: ellipse; marker-width: 20; marker-fill: #0272b9; marker-allow-overlap: true; }',
               interactivity: 'name, the_geom, description'
           }]
