@@ -50,6 +50,8 @@ swal({
 
 function main() {
     if (startmap == false) {
+        fail = [];
+        correct = [];
         scorenumber = 0;
         questions = answer;
         idquestion = idanswer;
@@ -260,8 +262,8 @@ function finishgame() {
 }
 
 function showmapresultall() {
-  https://hectoruch.cartodb.com/api/v2/sql?q=INSERT INTO user_half_earth_game (cartodb_id, the_geom, correctanswer, failanswer, points) VALUES ( 1, ST_SetSRID(ST_Point(-110, 43),4326,34,54))&api_key={api_key}
-    $("body").append("<div id='map'></div>");
+    https: //hectoruch.cartodb.com/api/v2/sql?q=INSERT INTO user_half_earth_game (cartodb_id, the_geom, correctanswer, failanswer, points) VALUES ( 1, ST_SetSRID(ST_Point(-110, 43),4326,34,54))&api_key={api_key}
+        $("body").append("<div id='map'></div>");
     map = new L.Map('map', {
         zoomControl: false,
         center: [0, 0],
@@ -271,45 +273,45 @@ function showmapresultall() {
         attribution: 'Stamen'
     }).addTo(map);
     cartodb.createLayer(map, {
-            user_name: 'hectoruch',
-            type: 'cartodb',
-            sublayers: [{
-                sql: "SELECT * FROM map_game_nature WHERE cartodb_id IN (" + fail + ")",
-                cartocss: '#map_game_nature{ marker-fill-opacity: 1; marker-line-color: #FFF; marker-line-width: 1.5; marker-line-opacity: 1; marker-placement: point; marker-type: ellipse; marker-width: 20; marker-fill: red; marker-allow-overlap: true; }',
-                interactivity: 'name, the_geom, description'
-            }, {
-                sql: "SELECT * FROM map_game_nature WHERE cartodb_id IN (" + correct + ")",
-                cartocss: '#map_game_nature{ marker-fill-opacity: 1; marker-line-color: #FFF; marker-line-width: 1.5; marker-line-opacity: 1; marker-placement: point; marker-type: ellipse; marker-width: 20; marker-fill: green; marker-allow-overlap: true; }',
-                interactivity: 'name, the_geom, description'
-            }]
-        })
-        .addTo(map)
-        .done(function(layer) {
-            layer.setInteraction(true);
-            layer.on('featureClick', function(e, latlng, pos, data) {
-                swal({
-                    title: data.name,
-                    text: data.description,
-                    showCancelButton: true,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "Return map",
-                    cancelButtonText: "Know more",
-                    closeOnConfirm: true,
-                    closeOnCancel: false
-                }, function(isConfirm) {
-                    if (isConfirm) {} else {
-                        window.open(data.moreinfo, '_blank');
-                    }
-                });
+        user_name: 'hectoruch',
+        type: 'cartodb',
+        sublayers: [{
+            sql: "SELECT * FROM map_game_nature WHERE cartodb_id IN (" + fail + ")",
+            cartocss: '#map_game_nature{ marker-fill-opacity: 1; marker-line-color: #FFF; marker-line-width: 1.5; marker-line-opacity: 1; marker-placement: point; marker-type: ellipse; marker-width: 20; marker-fill: red; marker-allow-overlap: true; }',
+            interactivity: 'name, the_geom, description'
+        }, {
+            sql: "SELECT * FROM map_game_nature WHERE cartodb_id IN (" + correct + ")",
+            cartocss: '#map_game_nature{ marker-fill-opacity: 1; marker-line-color: #FFF; marker-line-width: 1.5; marker-line-opacity: 1; marker-placement: point; marker-type: ellipse; marker-width: 20; marker-fill: green; marker-allow-overlap: true; }',
+            interactivity: 'name, the_geom, description'
+        }]
+    })
+    .addTo(map)
+    .done(function(layer) {
+        layer.setInteraction(true);
+        layer.on('featureClick', function(e, latlng, pos, data) {
+            swal({
+                title: data.name,
+                text: data.description,
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Return map",
+                cancelButtonText: "Know more",
+                closeOnConfirm: true,
+                closeOnCancel: false
+            }, function(isConfirm) {
+                if (isConfirm) {} else {
+                    window.open(data.moreinfo, '_blank');
+                }
             });
-        }).on('error', function() {
-            cartodb.log.log("some error occurred");
         });
+    }).on('error', function() {
+        cartodb.log.log("some error occurred");
+    });
 }
 
 function showmapresultfail() {
-  https://hectoruch.cartodb.com/api/v2/sql?q=INSERT INTO user_half_earth_game (cartodb_id, the_geom, correctanswer, failanswer, points) VALUES ( 1, ST_SetSRID(ST_Point(-110, 43),4326,34,54))&api_key={api_key}
-    $("body").append("<div id='map'></div>");
+    https: //hectoruch.cartodb.com/api/v2/sql?q=INSERT INTO user_half_earth_game (cartodb_id, the_geom, correctanswer, failanswer, points) VALUES ( 1, ST_SetSRID(ST_Point(-110, 43),4326,34,54))&api_key={api_key}
+        $("body").append("<div id='map'></div>");
     map = new L.Map('map', {
         zoomControl: false,
         center: [0, 0],
@@ -320,42 +322,42 @@ function showmapresultfail() {
     }).addTo(map);
     var popup = L.popup();
     cartodb.createLayer(map, {
-            user_name: 'hectoruch',
-            type: 'cartodb',
-            sublayers: [{
-                sql: "SELECT * FROM map_game_nature WHERE cartodb_id IN (" + fail + ")",
-                cartocss: '#map_game_nature{ marker-fill-opacity: 1; marker-line-color: #FFF; marker-line-width: 1.5; marker-line-opacity: 1; marker-placement: point; marker-type: ellipse; marker-width: 20; marker-fill: red; marker-allow-overlap: true; }',
-                interactivity: 'name, the_geom, description'
-            }]
-        })
-        .addTo(map)
-        .done(function(layer) {
-            layer.setInteraction(true);
-            layer.on('featureClick', function(e, latlng, pos, data) {
-                swal({
-                    title: data.name,
-                    text: data.description,
-                    showCancelButton: true,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "Return map",
-                    cancelButtonText: "Know more",
-                    closeOnConfirm: true,
-                    closeOnCancel: false
-                }, function(isConfirm) {
-                    if (isConfirm) {} else {
-                        window.open(data.moreinfo, '_blank');
-                    }
-                });
+        user_name: 'hectoruch',
+        type: 'cartodb',
+        sublayers: [{
+            sql: "SELECT * FROM map_game_nature WHERE cartodb_id IN (" + fail + ")",
+            cartocss: '#map_game_nature{ marker-fill-opacity: 1; marker-line-color: #FFF; marker-line-width: 1.5; marker-line-opacity: 1; marker-placement: point; marker-type: ellipse; marker-width: 20; marker-fill: red; marker-allow-overlap: true; }',
+            interactivity: 'name, the_geom, description'
+        }]
+    })
+    .addTo(map)
+    .done(function(layer) {
+        layer.setInteraction(true);
+        layer.on('featureClick', function(e, latlng, pos, data) {
+            swal({
+                title: data.name,
+                text: data.description,
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Return map",
+                cancelButtonText: "Know more",
+                closeOnConfirm: true,
+                closeOnCancel: false
+            }, function(isConfirm) {
+                if (isConfirm) {} else {
+                    window.open(data.moreinfo, '_blank');
+                }
             });
-        }).on('error', function() {
-            cartodb.log.log("some error occurred");
         });
+    }).on('error', function() {
+        cartodb.log.log("some error occurred");
+    });
 }
 
 
 function showmapresultcorrect() {
-  https://hectoruch.cartodb.com/api/v2/sql?q=INSERT INTO user_half_earth_game (cartodb_id, the_geom, correctanswer, failanswer, points) VALUES ( 1, ST_SetSRID(ST_Point(-110, 43),4326,34,54))&api_key={api_key}
-    $("body").append("<div id='map'></div>");
+    https: //hectoruch.cartodb.com/api/v2/sql?q=INSERT INTO user_half_earth_game (cartodb_id, the_geom, correctanswer, failanswer, points) VALUES ( 1, ST_SetSRID(ST_Point(-110, 43),4326,34,54))&api_key={api_key}
+        $("body").append("<div id='map'></div>");
     map = new L.Map('map', {
         zoomControl: false,
         center: [0, 0],
@@ -365,36 +367,36 @@ function showmapresultcorrect() {
         attribution: 'Stamen'
     }).addTo(map);
     cartodb.createLayer(map, {
-            user_name: 'hectoruch',
-            type: 'cartodb',
-            sublayers: [{
-                sql: "SELECT * FROM map_game_nature WHERE cartodb_id IN (" + correct + ")",
-                cartocss: '#map_game_nature{ marker-fill-opacity: 1; marker-line-color: #FFF; marker-line-width: 1.5; marker-line-opacity: 1; marker-placement: point; marker-type: ellipse; marker-width: 20; marker-fill: green; marker-allow-overlap: true; }',
-                interactivity: 'name, the_geom, description'
-            }]
-        })
-        .addTo(map)
-        .done(function(layer) {
-            layer.setInteraction(true);
-            layer.on('featureClick', function(e, latlng, pos, data) {
-                swal({
-                    title: data.name,
-                    text: data.description,
-                    showCancelButton: true,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "Return map",
-                    cancelButtonText: "Know more",
-                    closeOnConfirm: true,
-                    closeOnCancel: true
-                }, function(isConfirm) {
-                    if (isConfirm) {} else {
-                        window.open(data.moreinfo, '_blank');
-                    }
-                });
+        user_name: 'hectoruch',
+        type: 'cartodb',
+        sublayers: [{
+            sql: "SELECT * FROM map_game_nature WHERE cartodb_id IN (" + correct + ")",
+            cartocss: '#map_game_nature{ marker-fill-opacity: 1; marker-line-color: #FFF; marker-line-width: 1.5; marker-line-opacity: 1; marker-placement: point; marker-type: ellipse; marker-width: 20; marker-fill: green; marker-allow-overlap: true; }',
+            interactivity: 'name, the_geom, description'
+        }]
+    })
+    .addTo(map)
+    .done(function(layer) {
+        layer.setInteraction(true);
+        layer.on('featureClick', function(e, latlng, pos, data) {
+            swal({
+                title: data.name,
+                text: data.description,
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Return map",
+                cancelButtonText: "Know more",
+                closeOnConfirm: true,
+                closeOnCancel: true
+            }, function(isConfirm) {
+                if (isConfirm) {} else {
+                    window.open(data.moreinfo, '_blank');
+                }
             });
-        }).on('error', function() {
-            cartodb.log.log("some error occurred");
         });
+    }).on('error', function() {
+        cartodb.log.log("some error occurred");
+    });
 }
 
 function opendash() {
