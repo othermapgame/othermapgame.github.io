@@ -8,6 +8,7 @@ var number = 0; /*random number for questions, always differente*/
 var scorenumber = 0; /*quantity of good answers*/
 var numberquestion = 1; /*order questions*/
 var contador = /*many questions are complete*/
+var start = false;
 
     /*Get all the information about the map, use cartodb and leaflet*/
     $.getJSON('https://hectoruch.cartodb.com/api/v2/sql?q= SELECT * FROM map_game_nature', function(data) {
@@ -47,7 +48,12 @@ swal({
 });
 
 function main() {
-  map.remove();
+  if(start == false){
+
+  }else{
+      map.remove();
+  }
+  start = true;
   $("#finishbutn").attr("onClick", "finishgame()");
   $("#finishbutn").html("Finish game");
     var map = new L.Map('map', {
