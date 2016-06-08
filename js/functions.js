@@ -7,7 +7,7 @@ var fail = []; /*array question bad answered*/
 var number = 0; /*random number for questions, always differente*/
 var scorenumber = 0; /*quantity of good answers*/
 var numberquestion = 1; /*order questions*/
-var contador = /*many questions are complete*/
+var contador = 0;/*many questions are complete*/
 var startmap = false;
 
     /*Get all the information about the map, use cartodb and leaflet*/
