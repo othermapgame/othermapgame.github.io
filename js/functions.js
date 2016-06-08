@@ -47,6 +47,8 @@ swal({
 });
 
 function main() {
+  $("#finishbutn").attr("onClick", "finishgame()");
+  $("finishbutn").html("Finish game");
     var map = new L.Map('map', {
         zoomControl: false,
         center: [0, 0],
@@ -184,6 +186,8 @@ function finishgame() {
     }, function(isConfirm) {
         if (isConfirm) {
             $("#questionbox").css("display", "none");
+            $("#finishbutn").attr("onClick", "main()");
+            $("finishbutn").html("Start new game");
             swal({
                 title: "You have",
                 text: "<span style='color:green;'>success: " + correct.length + "</span> <span style='color:red;'>fails:" + fail.length + "</span>",
