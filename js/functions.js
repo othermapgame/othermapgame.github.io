@@ -152,10 +152,10 @@ $("#finishbutn").click(function() {
                 title: "Your score is",
                 text: scorenumber,
                 confirmButtonColor: "#0472b8",
-                confirmButtonText: "Play again",
+                confirmButtonText: "Show map results",
                 closeOnConfirm: false,
             }, function() {
-                scorenumber = 0;
+                /*scorenumber = 0;
                 questions = answer;
                 contador = questions.length;
                 number = Math.floor((Math.random() * contador) + 0);
@@ -166,13 +166,18 @@ $("#finishbutn").click(function() {
                     text: "WHERE IS " + questions[number] + " ?",
                     confirmButtonColor: "#0472b8",
                     confirmButtonText: "Go map",
-                });
+                });*/
+                showmapresult();
             });
         } else {
             swal("Cancelled", "Your game is save", "error");
         }
     });
 });
+
+function showmapresult(){
+  alert(fail);
+}
 
 function opendash() {
     $(".sideBar").css("top", "0px");
