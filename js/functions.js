@@ -110,6 +110,8 @@ function main() {
             layer.on('featureClick', function(e, latlng, pos, data) {
                 $("#questionbox").css("display", "none");
                 if (idquestion.length == 1) {
+                  $("#finishbutn").attr("onClick", "main()");
+                  $("#finishbutn").html("Start new game");
                     swal({
                         title: "You have",
                         text: "success: " + correct.length + " fails:" + fail.length + " ",
