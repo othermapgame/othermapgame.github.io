@@ -145,7 +145,7 @@ function main() {
             layer.setInteraction(true);
             layer.on('featureClick', function(e, latlng, pos, data) {
                 $("#questionbox").css("display", "none");
-
+                console.log(idquestion.length);
                 if (idquestion.length == 1) {
                     swal({
                         title: "Are you sure?",
