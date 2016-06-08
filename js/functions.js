@@ -186,7 +186,7 @@ function finishgame() {
             $("#questionbox").css("display", "none");
             swal({
                 title: "You have",
-                text: "success: " + correct.length + " fails:" + fail.length + " ",
+                text: "<span style='color:green;'>success: " + correct.length + "</span> <span style='color:red;'>fails:" + fail.length + "</span>",
                 confirmButtonColor: "#0472b8",
                 confirmButtonText: "Show map results",
                 closeOnConfirm: true,
