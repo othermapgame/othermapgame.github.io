@@ -51,13 +51,6 @@ swal({
 
 function main() {
     if (startmap == false) {
-        fail = [];
-        correct = [];
-        scorenumber = 0;
-        questions=[];
-        idquestion=[];
-        questions = answer;
-        idquestion = idanswer;
         contador = questions.length;
         number = Math.floor((Math.random() * contador) + 0);
         swal({
