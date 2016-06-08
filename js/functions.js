@@ -261,7 +261,7 @@ function showmapresultall() {
                     closeOnCancel: false
                 }, function(isConfirm) {
                     if (isConfirm) {} else {
-                        swal("Cancelled", "Your game is save", "error");
+                        window.open(data.moreinfo, '_blank');
                     }
                 });
             });
@@ -305,7 +305,7 @@ function showmapresultfail() {
                     closeOnCancel: false
                 }, function(isConfirm) {
                     if (isConfirm) {} else {
-                        swal("Cancelled", "Your game is save", "error");
+                        window.open(data.moreinfo, '_blank');
                     }
                 });
             });
@@ -349,7 +349,7 @@ function showmapresultcorrect() {
                     closeOnConfirm: true,
                     closeOnCancel: true
                 }, function(isConfirm) {
-                    if (isConfirm) {} else { 
+                    if (isConfirm) {} else {
                         window.open(data.moreinfo, '_blank');
                     }
                 });
