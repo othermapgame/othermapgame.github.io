@@ -1,5 +1,7 @@
 var questions = []; /*array questions (name)*/
 var answer = []; /*copy of array questions*/
+var idquestion = [];
+var idanswer = [];
 var correct = []; /*array questions good answered*/
 var fail = []; /*array question bad answered*/
 var number = 0; /*random number for questions, always differente*/
@@ -12,6 +14,8 @@ var contador = /*many questions are complete*/
         $.each(data.rows, function(key, val) {
             questions.push(val.name);
             answer.push(val.name);
+            idquestion.push(val.cartodb_id);
+            idanswer.push(val.cartodb_id);
         });
     });
 
@@ -91,8 +95,9 @@ function main() {
                 } else {
                     if (questions[number] == data.name) {
                         scorenumber++;
-                        correct.push(number);
+                        correct.push(idquestion[number]);
                         questions.splice(number, 1);
+                        idquestion.splice(number, 1);
                         console.log(correct);
                         contador = questions.length;
                         number = Math.floor((Math.random() * contador) + 0);
@@ -109,9 +114,10 @@ function main() {
                             }
                         });
                     } else {
-                        fail.push(number);
+                        fail.push(idquestion[number]);
                         console.log(fail);
                         questions.splice(number, 1);
+                        idquestion.splice(number, 1);
                         contador = questions.length;
                         number = Math.floor((Math.random() * contador) + 0);
                         document.getElementById("questionbox").innerHTML = "<span>WHERE IS " + questions[number] + " ?</span>";
@@ -188,7 +194,6 @@ function showmapresult() {
         attribution: 'Stamen'
     }).addTo(map);
     var popup = L.popup();
-    //map.on('click', onMapClick);
     cartodb.createLayer(map, {
             user_name: 'hectoruch',
             type: 'cartodb',
