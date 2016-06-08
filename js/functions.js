@@ -21,7 +21,7 @@ $.getJSON('https://hectoruch.cartodb.com/api/v2/sql?q= SELECT * FROM map_game_na
     });
 });
 
-function mapToPosition(position){
+/*function mapToPosition(position){
    lon = position.coords.longitude;
    lat = position.coords.latitude;
  }
@@ -49,7 +49,7 @@ function detectUserLocation() {
         };
         alert("Error: " + errors[error.code]);
     }
-}
+}*/
 
 var sql = new cartodb.SQL({
     user: 'hectoruch'
