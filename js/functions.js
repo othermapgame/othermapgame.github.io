@@ -16,48 +16,8 @@ $.getJSON('https://hectoruch.cartodb.com/api/v2/sql?q= SELECT * FROM map_game_na
     $.each(data.rows, function(key, val) {
         questions.push(val.name);
         answer.push(val.name);
-        idquestion.push(val.cartodb_id);
-        idanswer.push(val.cartodb_id);
     });
 });
-
-https://hectoruch.cartodb.com/api/v2/sql?q=INSERT INTO user_half_earth_game (correctanswer,failanswer,points) VALUES (12,'value2','value3')&api_key=be1f15570e60388973be3cb08edb426e8df1dfbf
-
-
-var sql = cartodb.SQL({ user: 'hectoruch' });
-//sql.execute("INSERT INTO user_half_earth_game (correctanswer,failanswer,points) VALUES (12,'value2','value3')&api_key=be1f15570e60388973be3cb08edb426e8df1dfbf");
-
-/*function mapToPosition(position){
-   lon = position.coords.longitude;
-   lat = position.coords.latitude;
- }
-
-function detectUserLocation() {
-    if (navigator.geolocation) {
-        var timeoutVal = 10 * 1000 * 1000;
-        navigator.geolocation.watchPosition(
-            mapToPosition,
-            alertError, {
-                enableHighAccuracy: true,
-                timeout: timeoutVal,
-                maximumAge: 0
-            }
-        );
-    } else {
-        alert("Geolocation is not supported by this browser");
-    }
-
-    function alertError(error) {
-        var errors = {
-            1: 'Permission denied',
-            2: 'Position unavailable',
-            3: 'Request timeout'
-        };
-        alert("Error: " + errors[error.code]);
-    }
-}*/
-
-
 
 contador = questions.length;
 number = Math.floor((Math.random() * contador) + 0); /*get random number for questions*/
