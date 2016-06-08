@@ -176,11 +176,11 @@ $("#finishbutn").click(function() {
 });
 
 function showmapresult(){
-  var map = new L.Map('map', {
+  /*var map = new L.Map('map', {
       zoomControl: false,
       center: [0, 0],
       zoom: 3
-  });
+  });*/
   L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', { /*http://maps.stamen.com/*/
       attribution: 'Stamen'
   }).addTo(map);
