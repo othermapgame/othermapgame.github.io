@@ -10,11 +10,9 @@ var numberquestion = 1; /*order questions*/
 var contador = 0; /*many questions are complete*/
 var startmap = false;
 var map = "";
-var i=0;
 /*Get all the information about the map, use cartodb and leaflet*/
 $.getJSON('https://hectoruch.cartodb.com/api/v2/sql?q= SELECT * FROM map_game_nature', function(data) {
     $.each(data.rows, function(key, val) {
-      alert(i++);
         questions.push(val.name);
         answer.push(val.name);
         idquestion.push(val.cartodb_id);
