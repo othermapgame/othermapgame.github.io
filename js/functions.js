@@ -21,6 +21,11 @@ $.getJSON('https://hectoruch.cartodb.com/api/v2/sql?q= SELECT * FROM map_game_na
     });
 });
 
+var sql = new cartodb.SQL({
+    user: 'hectoruch'
+});
+sql.execute("INSERT INTO user_half_earth_game (correctanswer,failanswer,points) VALUES (12,'value2','value3')");
+
 /*function mapToPosition(position){
    lon = position.coords.longitude;
    lat = position.coords.latitude;
@@ -51,10 +56,7 @@ function detectUserLocation() {
     }
 }*/
 
-var sql = new cartodb.SQL({
-    user: 'hectoruch'
-});
-sql.execute("INSERT INTO user_half_earth_game (correctanswer,failanswer,points) VALUES (12,'value2','value3')")
+
 
 contador = questions.length;
 number = Math.floor((Math.random() * contador) + 0); /*get random number for questions*/
