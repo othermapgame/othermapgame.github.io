@@ -87,8 +87,6 @@ swal({
 });
 
 function main() {
-  console.log(idquestion.length);
-  console.log(questions.length);
     if (startmap == false) {
         fail = [];
         correct = [];
@@ -199,6 +197,8 @@ function main() {
                         }
                     });
                 } else {
+                  console.log(idquestion.length);
+                  console.log(questions.length);
                     if (questions[number] == data.name) {
                         scorenumber++;
                         correct.push(idquestion[number]);
