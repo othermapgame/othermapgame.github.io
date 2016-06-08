@@ -149,11 +149,12 @@ $("#finishbutn").click(function() {
         if (isConfirm) {
             $("#questionbox").css("display", "none");
             swal({
-                title: "Your score is",
-                text: scorenumber,
+                title: "You have",
+                text: "success: "+correct.length+" fails:"+fail.length,
                 confirmButtonColor: "#0472b8",
                 confirmButtonText: "Show map results",
                 closeOnConfirm: true,
+                html:true,
             }, function() {
                 /*scorenumber = 0;
                 questions = answer;
