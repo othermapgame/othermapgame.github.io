@@ -167,6 +167,7 @@ $("#finishbutn").click(function() {
                     confirmButtonColor: "#0472b8",
                     confirmButtonText: "Go map",
                 });*/
+                map.remove();
                 showmapresult();
             });
         } else {
