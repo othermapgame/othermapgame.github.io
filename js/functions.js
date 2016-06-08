@@ -12,7 +12,7 @@ var startmap = false;
 var map = "";
 
 /*Get all the information about the map, use cartodb and leaflet*/
-$.getJSON('https://hectoruch.cartodb.com/api/v2/sql?q= SELECT * FROM map_game_nature LIMIT 32', function(data) {
+$.getJSON('https://hectoruch.cartodb.com/api/v2/sql?q= SELECT * FROM map_game_nature', function(data) {
     $.each(data.rows, function(key, val) {
         questions.push(val.name);
         answer.push(val.name);
@@ -54,6 +54,8 @@ function main() {
         fail = [];
         correct = [];
         scorenumber = 0;
+        questions=[];
+        idquestion=[];
         questions = answer;
         idquestion = idanswer;
         contador = questions.length;
