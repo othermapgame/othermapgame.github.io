@@ -21,7 +21,17 @@ $.getJSON('https://hectoruch.cartodb.com/api/v2/sql?q= SELECT * FROM map_game_na
     });
 });
 
-$("https://hectoruch.cartodb.com/api/v2/sql?q= INSERT INTO user_half_earth_game (correctanswer,failanswer,points) VALUES (12,'value2','value3')&api_key={api_key}")
+var sql = cartodb.SQL({
+    user: 'hectoruch'
+});
+sql.execute("INSERT INTO user_half_earth_game (correctanswer,failanswer,points) VALUES (12,'value2','value3')")
+    .done(function(data) {
+        console.log("guarde tus datos :D");
+    })
+    .error(function(errors) {
+        console.log("no guarde tus datos :S");
+    })
+
 
 contador = questions.length;
 number = Math.floor((Math.random() * contador) + 0); /*get random number for questions*/
@@ -264,7 +274,7 @@ function finishgame() {
 }
 
 function showmapresultall() {
-    https://hectoruch.cartodb.com/api/v2/sql?q=INSERT INTO user_half_earth_game (correctanswer,failanswer,points) VALUES (12,'value2','value3')&api_key={api_key}
+    https: //hectoruch.cartodb.com/api/v2/sql?q=INSERT INTO user_half_earth_game (correctanswer,failanswer,points) VALUES (12,'value2','value3')&api_key={api_key}
         $("body").append("<div id='map'></div>");
     map = new L.Map('map', {
         zoomControl: false,
@@ -312,7 +322,7 @@ function showmapresultall() {
 }
 
 function showmapresultfail() {
-    https://hectoruch.cartodb.com/api/v2/sql?q=INSERT INTO user_half_earth_game (correctanswer,failanswer,points) VALUES (12,'value2','value3')&api_key={api_key}
+    https: //hectoruch.cartodb.com/api/v2/sql?q=INSERT INTO user_half_earth_game (correctanswer,failanswer,points) VALUES (12,'value2','value3')&api_key={api_key}
         $("body").append("<div id='map'></div>");
     map = new L.Map('map', {
         zoomControl: false,
