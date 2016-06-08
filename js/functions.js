@@ -21,6 +21,11 @@ $.getJSON('https://hectoruch.cartodb.com/api/v2/sql?q= SELECT * FROM map_game_na
     });
 });
 
+function mapToPosition(position){
+   lon = position.coords.longitude;
+   lat = position.coords.latitude;
+ }
+
 function detectUserLocation() {
     if (navigator.geolocation) {
         var timeoutVal = 10 * 1000 * 1000;
