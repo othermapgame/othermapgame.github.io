@@ -73,24 +73,54 @@ function main() {
                 $("#questionbox").css("display", "none");
                 if (questions.length == 1) {
                     swal({
-                        title: "Your score is",
-                        text: scorenumber,
-                        confirmButtonColor: "#0472b8",
-                        confirmButtonText: "Play again",
+                        title: "Are you sure?",
+                        text: "You will lose all your progress",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "Yes!",
+                        cancelButtonText: "No!",
                         closeOnConfirm: false,
-                    }, function() {
-                        scorenumber = 0;
-                        questions = answer;
-                        contador = questions.length;
-                        number = Math.floor((Math.random() * contador) + 0);
-                        document.getElementById("questionbox").innerHTML = "<span>WHERE IS " + questions[number] + " ?</span>";
-                        numberquestion = 1;
-                        swal({
-                            title: "Question",
-                            text: "WHERE IS " + questions[number] + " ?",
-                            confirmButtonColor: "#0472b8",
-                            confirmButtonText: "Go map",
-                        });
+                        closeOnCancel: false
+                    }, function(isConfirm) {
+                        if (isConfirm) {
+                            $("#questionbox").css("display", "none");
+                            swal({
+                                title: "You have",
+                                text: "success: " + correct.length + " fails:" + fail.length + " ",
+                                confirmButtonColor: "#0472b8",
+                                confirmButtonText: "Show map results",
+                                closeOnConfirm: true,
+                                html: true,
+                            }, function() {
+                                /*scorenumber = 0;
+                                questions = answer;
+                                contador = questions.length;
+                                number = Math.floor((Math.random() * contador) + 0);
+                                document.getElementById("questionbox").innerHTML = "<span>WHERE IS " + questions[number] + " ?</span>";
+                                numberquestion = 1;
+                                swal({
+                                    title: "Question",
+                                    text: "WHERE IS " + questions[number] + " ?",
+                                    confirmButtonColor: "#0472b8",
+                                    confirmButtonText: "Go map",
+                                });*/
+                                map.remove();
+                                if (fail.length == 0 && correct.length == 0) {}
+                                if (fail.length > 0 && correct.length > 0) {
+                                    showmapresultall();
+                                }
+                                if (fail.length > 0 && correct.length == 0) {
+                                    showmapresultfail();
+                                }
+                                if (fail.length == 0 && correct.length > 0) {
+                                    showmapresultcorrect();
+                                }
+
+                            });
+                        } else {
+                            swal("Cancelled", "Your game is save", "error");
+                        }
                     });
                 } else {
                     if (questions[number] == data.name) {
@@ -230,8 +260,7 @@ function showmapresultall() {
                     closeOnConfirm: true,
                     closeOnCancel: false
                 }, function(isConfirm) {
-                    if (isConfirm) {
-                    } else {
+                    if (isConfirm) {} else {
                         swal("Cancelled", "Your game is save", "error");
                     }
                 });
@@ -275,8 +304,7 @@ function showmapresultfail() {
                     closeOnConfirm: true,
                     closeOnCancel: false
                 }, function(isConfirm) {
-                    if (isConfirm) {
-                    } else {
+                    if (isConfirm) {} else {
                         swal("Cancelled", "Your game is save", "error");
                     }
                 });
@@ -321,9 +349,8 @@ function showmapresultcorrect() {
                     closeOnConfirm: true,
                     closeOnCancel: true
                 }, function(isConfirm) {
-                    if (isConfirm) {
-                    } else {
-                        window.open(data.moreinfo,'_blank');
+                    if (isConfirm) {} else {
+                        window.open(data.moreinfo, '_blank');
                     }
                 });
             });
