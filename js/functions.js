@@ -175,7 +175,7 @@ function finishgame() {
             swal("Cancelled", "Your game is save", "error");
         }
     });
-});
+}
 
 function showmapresult() {
     $("body").append("<div id='map'></div>");
