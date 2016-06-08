@@ -156,7 +156,7 @@ function finishgame() {
             $("#questionbox").css("display", "none");
             swal({
                 title: "You have",
-                text: "success: " + correct.length + " fails:" + fail.length+" ",
+                text: "success: " + correct.length + " fails:" + fail.length + " ",
                 confirmButtonColor: "#0472b8",
                 confirmButtonText: "Show map results",
                 closeOnConfirm: true,
@@ -175,7 +175,17 @@ function finishgame() {
                     confirmButtonText: "Go map",
                 });*/
                 map.remove();
-                showmapresult();
+                if (fail.length == 0 && correct.length == 0) {}
+                if (fail.length > 0 && correct.length > 0) {
+                    showmapresultall();
+                }
+                if (fail.length > 0 && correct.length == 0) {
+                    showmapresultfail();
+                }
+                if (fail.length == 0 && correct.length > 0) {
+                    showmapresultcorrect();
+                }
+
             });
         } else {
             swal("Cancelled", "Your game is save", "error");
@@ -183,7 +193,7 @@ function finishgame() {
     });
 }
 
-function showmapresult() {
+function showmapresultall() {
     $("body").append("<div id='map'></div>");
     var map = new L.Map('map', {
         zoomControl: false,
@@ -198,22 +208,82 @@ function showmapresult() {
             user_name: 'hectoruch',
             type: 'cartodb',
             sublayers: [{
-                    sql: "SELECT * FROM map_game_nature WHERE cartodb_id IN (" + fail + ")",
-                    cartocss: '#map_game_nature{ marker-fill-opacity: 1; marker-line-color: #FFF; marker-line-width: 1.5; marker-line-opacity: 1; marker-placement: point; marker-type: ellipse; marker-width: 20; marker-fill: red; marker-allow-overlap: true; }',
-                    interactivity: 'name, the_geom, description'
-                },{
+                sql: "SELECT * FROM map_game_nature WHERE cartodb_id IN (" + fail + ")",
+                cartocss: '#map_game_nature{ marker-fill-opacity: 1; marker-line-color: #FFF; marker-line-width: 1.5; marker-line-opacity: 1; marker-placement: point; marker-type: ellipse; marker-width: 20; marker-fill: red; marker-allow-overlap: true; }',
+                interactivity: 'name, the_geom, description'
+            }, {
                 sql: "SELECT * FROM map_game_nature WHERE cartodb_id IN (" + correct + ")",
                 cartocss: '#map_game_nature{ marker-fill-opacity: 1; marker-line-color: #FFF; marker-line-width: 1.5; marker-line-opacity: 1; marker-placement: point; marker-type: ellipse; marker-width: 20; marker-fill: green; marker-allow-overlap: true; }',
                 interactivity: 'name, the_geom, description'
             }]
-    })
-.addTo(map)
-    .done(function(layer) {
-        layer.setInteraction(true);
-    }).on('error', function() {
-        cartodb.log.log("some error occurred");
-    });
+        })
+        .addTo(map)
+        .done(function(layer) {
+            layer.setInteraction(true);
+        }).on('error', function() {
+            cartodb.log.log("some error occurred");
+        });
 }
+
+function showmapresultfail(){
+  $("body").append("<div id='map'></div>");
+  var map = new L.Map('map', {
+      zoomControl: false,
+      center: [0, 0],
+      zoom: 3
+  });
+  L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', { /*http://maps.stamen.com/*/
+      attribution: 'Stamen'
+  }).addTo(map);
+  var popup = L.popup();
+  cartodb.createLayer(map, {
+          user_name: 'hectoruch',
+          type: 'cartodb',
+          sublayers: [{
+              sql: "SELECT * FROM map_game_nature WHERE cartodb_id IN (" + fail + ")",
+              cartocss: '#map_game_nature{ marker-fill-opacity: 1; marker-line-color: #FFF; marker-line-width: 1.5; marker-line-opacity: 1; marker-placement: point; marker-type: ellipse; marker-width: 20; marker-fill: red; marker-allow-overlap: true; }',
+              interactivity: 'name, the_geom, description'
+          }]
+      })
+      .addTo(map)
+      .done(function(layer) {
+          layer.setInteraction(true);
+      }).on('error', function() {
+          cartodb.log.log("some error occurred");
+      });
+  }
+}
+
+function showmapresultcorrect(){
+  $("body").append("<div id='map'></div>");
+  var map = new L.Map('map', {
+      zoomControl: false,
+      center: [0, 0],
+      zoom: 3
+  });
+  L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', { /*http://maps.stamen.com/*/
+      attribution: 'Stamen'
+  }).addTo(map);
+  var popup = L.popup();
+  cartodb.createLayer(map, {
+          user_name: 'hectoruch',
+          type: 'cartodb',
+          sublayers: [{
+              sql: "SELECT * FROM map_game_nature WHERE cartodb_id IN (" + correct + ")",
+              cartocss: '#map_game_nature{ marker-fill-opacity: 1; marker-line-color: #FFF; marker-line-width: 1.5; marker-line-opacity: 1; marker-placement: point; marker-type: ellipse; marker-width: 20; marker-fill: green; marker-allow-overlap: true; }',
+              interactivity: 'name, the_geom, description'
+          }]
+      })
+      .addTo(map)
+      .done(function(layer) {
+          layer.setInteraction(true);
+      }).on('error', function() {
+          cartodb.log.log("some error occurred");
+      });
+  }
+}
+
+
 
 function opendash() {
     $(".sideBar").css("top", "0px");
