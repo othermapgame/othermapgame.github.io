@@ -20,6 +20,7 @@ $.getJSON('https://hectoruch.cartodb.com/api/v2/sql?q= SELECT * FROM map_game_na
         idanswer.push(val.cartodb_id);
     });
 });
+
 https://hectoruch.cartodb.com/api/v2/sql?q=INSERT INTO user_half_earth_game (correctanswer,failanswer,points) VALUES (12,'value2','value3')&api_key=be1f15570e60388973be3cb08edb426e8df1dfbf
 
 
@@ -144,7 +145,8 @@ function main() {
             layer.setInteraction(true);
             layer.on('featureClick', function(e, latlng, pos, data) {
                 $("#questionbox").css("display", "none");
-                if (questions.length == 1) {
+
+                if (idquestions.length == 1) {
                     swal({
                         title: "Are you sure?",
                         text: "You will lose all your progress",
@@ -201,7 +203,6 @@ function main() {
                         correct.push(idquestion[number]);
                         questions.splice(number, 1);
                         idquestion.splice(number, 1);
-                        console.log(correct);
                         contador = questions.length;
                         number = Math.floor((Math.random() * contador) + 0);
                         document.getElementById("questionbox").innerHTML = "<span>WHERE IS " + questions[number] + " ?</span>";
@@ -218,7 +219,6 @@ function main() {
                         });
                     } else {
                         fail.push(idquestion[number]);
-                        console.log(fail);
                         questions.splice(number, 1);
                         idquestion.splice(number, 1);
                         contador = questions.length;
