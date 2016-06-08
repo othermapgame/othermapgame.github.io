@@ -260,6 +260,7 @@ function finishgame() {
 }
 
 function showmapresultall() {
+  https://{hectoruch}.cartodb.com/api/v2/sql?q=INSERT INTO user_half_earth_game (cartodb_id, the_geom, correctanswer, failanswer, points) VALUES ( , ST_SetSRID(ST_Point(-110, 43),4326,34,54))&api_key={api_key}
     $("body").append("<div id='map'></div>");
     map = new L.Map('map', {
         zoomControl: false,
