@@ -252,7 +252,7 @@ function showmapresultfail(){
           cartodb.log.log("some error occurred");
       });
   }
-}
+
 
 function showmapresultcorrect(){
   $("body").append("<div id='map'></div>");
@@ -281,7 +281,7 @@ function showmapresultcorrect(){
           cartodb.log.log("some error occurred");
       });
   }
-}
+
 
 
 
