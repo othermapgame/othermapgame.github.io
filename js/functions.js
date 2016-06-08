@@ -153,7 +153,7 @@ $("#finishbutn").click(function() {
                 text: scorenumber,
                 confirmButtonColor: "#0472b8",
                 confirmButtonText: "Show map results",
-                closeOnConfirm: false,
+                closeOnConfirm: true,
             }, function() {
                 /*scorenumber = 0;
                 questions = answer;
