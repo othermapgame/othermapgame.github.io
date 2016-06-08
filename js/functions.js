@@ -7,19 +7,19 @@ var fail = []; /*array question bad answered*/
 var number = 0; /*random number for questions, always differente*/
 var scorenumber = 0; /*quantity of good answers*/
 var numberquestion = 1; /*order questions*/
-var contador = 0;/*many questions are complete*/
+var contador = 0; /*many questions are complete*/
 var startmap = false;
 var map = "";
 
-    /*Get all the information about the map, use cartodb and leaflet*/
-    $.getJSON('https://hectoruch.cartodb.com/api/v2/sql?q= SELECT * FROM map_game_nature', function(data) {
-        $.each(data.rows, function(key, val) {
-            questions.push(val.name);
-            answer.push(val.name);
-            idquestion.push(val.cartodb_id);
-            idanswer.push(val.cartodb_id);
-        });
+/*Get all the information about the map, use cartodb and leaflet*/
+$.getJSON('https://hectoruch.cartodb.com/api/v2/sql?q= SELECT * FROM map_game_nature', function(data) {
+    $.each(data.rows, function(key, val) {
+        questions.push(val.name);
+        answer.push(val.name);
+        idquestion.push(val.cartodb_id);
+        idanswer.push(val.cartodb_id);
     });
+});
 
 contador = questions.length;
 number = Math.floor((Math.random() * contador) + 0); /*get random number for questions*/
@@ -49,14 +49,38 @@ swal({
 });
 
 function main() {
-  if(startmap == false){
+    if (startmap == false) {
+        scorenumber = 0;
+        questions = answer;
+        idquestion = idanswer;
+        contador = questions.length;
+        number = Math.floor((Math.random() * contador) + 0);
+        swal({
+            title: "half_earth_game",
+            text: "Answer questions with the map, good luck!",
+            confirmButtonColor: "#0472b8",
+            confirmButtonText: "Start, right now!",
+            closeOnConfirm: false,
+        }, function() {
+            document.getElementById("questionbox").innerHTML = "<span>WHERE IS " + questions[number] + " ?</span>";
+            swal({
+                title: "Question " + numberquestion,
+                text: "WHERE IS " + questions[number] + " ?",
+                confirmButtonColor: "#0472b8",
+                confirmButtonText: "Go map",
+            }, function(isConfirm) {
+                if (isConfirm) {
+                    $("#questionbox").css("display", "block");
+                }
+            });
+        });
+    } else {
+        map.remove();
 
-  }else{
-      map.remove();
-  }
-  startmap = true;
-  $("#finishbutn").attr("onClick", "finishgame()");
-  $("#finishbutn").html("Finish game");
+    }
+    startmap = true;
+    $("#finishbutn").attr("onClick", "finishgame()");
+    $("#finishbutn").html("Finish game");
     map = new L.Map('map', {
         zoomControl: false,
         center: [0, 0],
