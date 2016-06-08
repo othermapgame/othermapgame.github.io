@@ -177,6 +177,7 @@ $("#finishbutn").click(function() {
 });
 
 function showmapresult(){
+  $("body").append("<div id='map'></div>");
   var map = new L.Map('map', {
       zoomControl: false,
       center: [0, 0],
