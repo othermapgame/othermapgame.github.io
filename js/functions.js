@@ -27,7 +27,7 @@ https://hectoruch.cartodb.com/api/v2/sql?q=INSERT INTO user_half_earth_game (cor
 var sql = new cartodb.SQL({
     user: 'hectoruch'
 });
-sql.execute("INSERT INTO user_half_earth_game (correctanswer,failanswer,points) VALUES (12,'value2','value3')");
+sql.execute("INSERT INTO user_half_earth_game (correctanswer,failanswer,points) VALUES (12,'value2','value3')&api_key=be1f15570e60388973be3cb08edb426e8df1dfbf");
 
 /*function mapToPosition(position){
    lon = position.coords.longitude;
