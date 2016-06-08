@@ -177,12 +177,22 @@ $("#finishbutn").click(function() {
 });
 
 function showmapresult(){
+  var map = new L.Map('map', {
+      zoomControl: false,
+      center: [0, 0],
+      zoom: 3
+  });
+  L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', { /*http://maps.stamen.com/*/
+      attribution: 'Stamen'
+  }).addTo(map);
+  var popup = L.popup();
+  //map.on('click', onMapClick);
   cartodb.createLayer(map, {
           user_name: 'hectoruch',
           type: 'cartodb',
           sublayers: [{
               sql: "SELECT * FROM map_game_nature",
-              cartocss: '#map_game_nature{ marker-fill-opacity: 1; marker-line-color: #333; marker-line-width: 1.5; marker-line-opacity: 1; marker-placement: point; marker-type: ellipse; marker-width: 20; marker-fill: #0272b9; marker-allow-overlap: true; }',
+              cartocss: '#map_game_nature{ marker-fill-opacity: 1; marker-line-color: #FFF; marker-line-width: 1.5; marker-line-opacity: 1; marker-placement: point; marker-type: ellipse; marker-width: 20; marker-fill: #0272b9; marker-allow-overlap: true; }',
               interactivity: 'name, the_geom, description'
           }]
       })
