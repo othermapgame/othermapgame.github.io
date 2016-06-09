@@ -1,3 +1,5 @@
+var lat = 0;
+var long = 0;
 var questions = []; /*array questions (name)*/
 var answer = []; /*copy of array questions*/
 var idquestion = [];
@@ -10,6 +12,7 @@ var numberquestion = 1; /*order questions*/
 var contador = 0; /*many questions are complete*/
 var startmap = false;
 var map = "";
+
 /*Get all the information about the map, use cartodb and leaflet*/
 $.getJSON('https://hectoruch.cartodb.com/api/v2/sql?q= SELECT * FROM map_game_nature', function(data) {
     $.each(data.rows, function(key, val) {
@@ -20,42 +23,8 @@ $.getJSON('https://hectoruch.cartodb.com/api/v2/sql?q= SELECT * FROM map_game_na
     });
 });
 
-contador = questions.length;
-number = Math.floor((Math.random() * contador) + 0); /*get random number for questions*/
-swal({
-    title: "half_earth_game",
-    /*introduction title*/
-    text: "Answer questions with the map, good luck!",
-    /*introduction description*/
-    confirmButtonColor: "#0472b8",
-    confirmButtonText: "Start, right now!",
-    closeOnConfirm: false,
-    /*when click button, not close, next function*/
-}, function() {
-    document.getElementById("questionbox").innerHTML = "<span>WHERE IS " + questions[number] + " ?</span>";
-    swal({
-        title: "Question " + numberquestion,
-        /*question, number*/
-        text: "WHERE IS " + questions[number] + " ?",
-        /*question, name*/
-        confirmButtonColor: "#0472b8",
-        confirmButtonText: "Go map",
-    }, function(isConfirm) {
-        if (isConfirm) {
-            $("#questionbox").css("display", "block"); /*appear box question with the question, all the users need read two times :)*/
-        }
-    });
-});
-
 function main() {
     if (startmap == false) {
-        /*fail = [];
-        correct = [];
-        scorenumber = 0;
-        questions=[];
-        idquestion=[];
-        questions = answer;
-        idquestion = idanswer;*/
         contador = questions.length;
         number = Math.floor((Math.random() * contador) + 0);
         swal({
@@ -119,18 +88,7 @@ function main() {
                         closeOnConfirm: true,
                         html: true,
                     }, function() {
-                        /*scorenumber = 0;
-                        questions = answer;
-                        contador = questions.length;
-                        number = Math.floor((Math.random() * contador) + 0);
-                        document.getElementById("questionbox").innerHTML = "<span>WHERE IS " + questions[number] + " ?</span>";
-                        numberquestion = 1;
-                        swal({
-                            title: "Question",
-                            text: "WHERE IS " + questions[number] + " ?",
-                            confirmButtonColor: "#0472b8",
-                            confirmButtonText: "Go map",
-                        });*/
+                        $.post("https://hectoruch.cartodb.com/api/v2/sql?q=INSERT INTO user_half_earth_game (the_geom, correctanswer, failanswer, points, lat, long) VALUES (ST_SetSRID(ST_Point("+long+", "+lat+"),4326), '"+correct+"', '"+fail+"', '"+scorenumber+"', '"+lat+"', '"+long+"')&api_key=be1f15570e60388973be3cb08edb426e8df1dfbf");
                         map.remove();
                         if (fail.length == 0 && correct.length == 0) {}
                         if (fail.length > 0 && correct.length > 0) {
@@ -216,19 +174,8 @@ function finishgame() {
                 closeOnConfirm: true,
                 html: true,
             }, function() {
-                /*scorenumber = 0;
-                questions = answer;
-                contador = questions.length;
-                number = Math.floor((Math.random() * contador) + 0);
-                document.getElementById("questionbox").innerHTML = "<span>WHERE IS " + questions[number] + " ?</span>";
-                numberquestion = 1;
-                swal({
-                    title: "Question",
-                    text: "WHERE IS " + questions[number] + " ?",
-                    confirmButtonColor: "#0472b8",
-                    confirmButtonText: "Go map",
-                });*/
                 map.remove();
+                $.post("https://hectoruch.cartodb.com/api/v2/sql?q=INSERT INTO user_half_earth_game (the_geom, correctanswer, failanswer, points, lat, long) VALUES (ST_SetSRID(ST_Point("+long+", "+lat+"),4326), '"+correct+"', '"+fail+"', '"+scorenumber+"', '"+lat+"', '"+long+"')&api_key=be1f15570e60388973be3cb08edb426e8df1dfbf");
                 if (fail.length == 0 && correct.length == 0) {}
                 if (fail.length > 0 && correct.length > 0) {
                     showmapresultall();

@@ -8,11 +8,16 @@
     "start": "node server.js"
   },
   "dependencies": {
-		"express": "^4.12.4",
-		"webpack-dev-server": "*",
-		"cartodb-api": "*"
-	},
+    "cartodb-api": "*",
+    "chart.js": "^2.1.4",
+    "express": "^4.12.4",
+    "webpack-dev-server": "*"
+  },
   "keywords": [],
   "author": "Vizzuality",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^1.13.1",
+    "webpack-dev-server": "^1.14.1"
+  }
 }

@@ -110,7 +110,7 @@ body {
     line-height: 32px;
     font-family: "Montserrat", sans-serif;
 }
-.sideBar__item.is-side-bar-item-selected {
+.sideBar__item:hover {
     background-color: #EEF3F5;
     border-radius: 4px;
 }

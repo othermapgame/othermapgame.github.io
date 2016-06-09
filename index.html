@@ -16,7 +16,7 @@
     <div id="openmenu" onclick="opendash();">Open menu</div>
     <div class="sideBar">
         <div class="sideBar__section">
-            <div class="sideBar__item is-side-bar-item-selected" id="finishbutn" onclick="finishgame()">Finish game</div>
+            <div class="sideBar__item" id="finishbutn" onclick="finishgame()">Finish game</div>
             <div class="sideBar__item" onclick="dosql();">See results</div>
             <div class="sideBar__item">About</div>
         </div>
@@ -29,11 +29,13 @@
     </div>
     <script src="js/jquery-2.2.4.min.js"></script>
     <script src="http://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
+    <script src="node_modules/chart.js/dist/chart.min.js"></script>
     <script src="node_modules/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="js/geolocation.js"></script>
     <script src="js/functions.js"></script>
     <script>
+        getLocation();
         window.onload = main;
-        $.post("https://hectoruch.cartodb.com/api/v2/sql?q=INSERT INTO user_half_earth_game (correctanswer, failanswer, points) VALUES ('value1', 'value2', 3)&api_key=be1f15570e60388973be3cb08edb426e8df1dfbf");
     </script>
 </body>
 
