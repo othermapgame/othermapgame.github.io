@@ -17,7 +17,6 @@ $.getJSON('https://hectoruch.cartodb.com/api/v2/sql?q= SELECT * FROM map_game_na
         answer.push(val.name);
         idquestion.push(val.cartodb_id);
         idanswer.push(val.cartodb_id);
-        alert(data.linkother);
     });
 });
 
