@@ -374,8 +374,8 @@ function showmapresultcorrect() {
                     closeOnCancel: true
                 }, function(isConfirm) {
                     if (isConfirm) {} else {
-                      alert(data.moreinfo); 
-                        window.open(data.moreinfo, '_blank');
+                      alert(data.moreinfo);
+                      //window.open(data.moreinfo, '_blank');
                     }
                 });
             });
