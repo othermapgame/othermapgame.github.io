@@ -48,7 +48,6 @@ swal({
 });
 
 function main() {
-    https: //hectoruch.cartodb.com/api/v2/sql?q=INSERT INTO user_half_earth_game (correctanswer, failanswer, points) VALUES ('value1', 'value2', 3)&api_key=be1f15570e60388973be3cb08edb426e8df1dfbf
     if (startmap == false) {
         /*fail = [];
         correct = [];
