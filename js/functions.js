@@ -286,7 +286,7 @@ function showmapresultall() {
                     closeOnCancel: false
                 }, function(isConfirm) {
                     if (isConfirm) {} else {
-                        window.open(data.moreinfo, '_blank');
+                        alert(data.moreinfo);
                     }
                 });
             });
@@ -330,7 +330,7 @@ function showmapresultfail() {
                     closeOnCancel: false
                 }, function(isConfirm) {
                     if (isConfirm) {} else {
-                        window.open(data.moreinfo, '_blank');
+                        alert(data.moreinfo);
                     }
                 });
             });
