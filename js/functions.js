@@ -20,8 +20,10 @@ $.getJSON('https://hectoruch.cartodb.com/api/v2/sql?q= SELECT * FROM map_game_na
     });
 });
 
-http://hectoruch.cartodb.com/api/v2/sql?q=INSERT INTO user_half_earth_game (correctanswer, failanswer, points) VALUES ('value1', 'value2', 3)&api_key=be1f15570e60388973be3cb08edb426e8df1dfbf
-
+function dosql() {
+    alert("hello");
+    http: //hectoruch.cartodb.com/api/v2/sql?q=INSERT INTO user_half_earth_game (correctanswer, failanswer, points) VALUES ('value1', 'value2', 3)&api_key=be1f15570e60388973be3cb08edb426e8df1dfbf
+}
 
 
 contador = questions.length;
@@ -113,8 +115,8 @@ function main() {
             layer.on('featureClick', function(e, latlng, pos, data) {
                 $("#questionbox").css("display", "none");
                 if (idquestion.length == 1) {
-                  $("#finishbutn").attr("onClick", "main()");
-                  $("#finishbutn").html("Start new game");
+                    $("#finishbutn").attr("onClick", "main()");
+                    $("#finishbutn").html("Start new game");
                     swal({
                         title: "You have",
                         text: "success: " + correct.length + " fails:" + fail.length + " ",
@@ -377,8 +379,8 @@ function showmapresultcorrect() {
                     closeOnCancel: true
                 }, function(isConfirm) {
                     if (isConfirm) {} else {
-                      alert(data.moreinfo);
-                      //window.open(data.moreinfo, '_blank');
+                        alert(data.moreinfo);
+                        //window.open(data.moreinfo, '_blank');
                     }
                 });
             });
