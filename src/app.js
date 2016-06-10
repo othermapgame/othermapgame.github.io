@@ -76,7 +76,6 @@ window.main = function() {
         });
     } else {
         map.remove();
-
     }
     startmap = true;
     $("#finishbutn").attr("onClick", "finishgame()");
@@ -84,7 +83,9 @@ window.main = function() {
     map = new L.Map('map', {
         zoomControl: false,
         center: [0, 0],
-        zoom: 3
+        zoom: 3,
+        maxZoom: 6,
+        minZoom: 3
     });
     L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', { /*http://maps.stamen.com/*/
         attribution: 'Stamen'
@@ -96,12 +97,18 @@ window.main = function() {
             type: 'cartodb',
             sublayers: [{
                 sql: "SELECT * FROM map_game_nature",
-                cartocss: '#map_game_nature{ marker-fill-opacity: 1; marker-line-color: #FFF; marker-line-width: 1.5; marker-line-opacity: 1; marker-placement: point; marker-type: ellipse; marker-width: 20; marker-fill: #0272b9; marker-allow-overlap: true; }',
+                cartocss: '#map_game_nature{ marker-fill-opacity: 1; marker-line-color: #FFF; marker-line-width: 1.5; marker-line-opacity: 1; marker-placement: point; marker-type: ellipse; marker-width: 25; marker-fill: #0272b9; marker-allow-overlap: true; }',
                 interactivity: 'name, the_geom, description'
             }]
         })
         .addTo(map)
         .done(function(layer) {
+            layer.on('featureOver', function(e, latlng, pos, data) {
+                $(this).css("cursor","pointer");
+            });
+            layer.on('featureOut', function(e, latlng, pos, data) {
+
+            });
             layer.setInteraction(true);
             layer.on('featureClick', function(e, latlng, pos, data) {
                 $("#questionbox").css("display", "none");
@@ -133,9 +140,6 @@ window.main = function() {
                         }
                     });
                 } else {
-                    console.log(idquestion.length);
-                    console.log(questions.length);
-                    console.log(questions);
                     if (questions[number] == data.name) {
                         scorenumber++;
                         correct.push(idquestion[number]);
@@ -146,7 +150,7 @@ window.main = function() {
                         document.getElementById("questionbox").innerHTML = "<span>WHERE IS " + questions[number] + " ?</span>";
                         numberquestion++;
                         swal({
-                            title: "Question " + numberquestion,
+                            title: "Question " + numberquestion + "/ " + totalnumber,
                             text: "WHERE IS " + questions[number] + " ?",
                             confirmButtonColor: "#0472b8",
                             confirmButtonText: "Go map",
@@ -245,17 +249,23 @@ window.showmapresultall = function() {
             type: 'cartodb',
             sublayers: [{
                 sql: "SELECT * FROM map_game_nature WHERE cartodb_id IN (" + fail + ")",
-                cartocss: '#map_game_nature{ marker-fill-opacity: 1; marker-line-color: #FFF; marker-line-width: 1.5; marker-line-opacity: 1; marker-placement: point; marker-type: ellipse; marker-width: 20; marker-fill: red; marker-allow-overlap: true; }',
+                cartocss: '#map_game_nature{ marker-fill-opacity: 1; marker-line-color: #FFF; marker-line-width: 1.5; marker-line-opacity: 1; marker-placement: point; marker-type: ellipse; marker-width: 25; marker-fill: red; marker-allow-overlap: true; }',
                 interactivity: 'name, the_geom, description'
             }, {
                 sql: "SELECT * FROM map_game_nature WHERE cartodb_id IN (" + correct + ")",
-                cartocss: '#map_game_nature{ marker-fill-opacity: 1; marker-line-color: #FFF; marker-line-width: 1.5; marker-line-opacity: 1; marker-placement: point; marker-type: ellipse; marker-width: 20; marker-fill: green; marker-allow-overlap: true; }',
+                cartocss: '#map_game_nature{ marker-fill-opacity: 1; marker-line-color: #FFF; marker-line-width: 1.5; marker-line-opacity: 1; marker-placement: point; marker-type: ellipse; marker-width: 25; marker-fill: green; marker-allow-overlap: true; }',
                 interactivity: 'name, the_geom, description'
             }]
         })
         .addTo(map)
         .done(function(layer) {
             layer.setInteraction(true);
+            /*layer.on('featureOver', function(e, latlng, pos, data) {
+              alert("entro");
+            });
+            layer.on('featureOut', function(e, latlng, pos, data) {
+              alert("salgo");
+            });*/
             layer.on('featureClick', function(e, latlng, pos, data) {
                 swal({
                     title: data.name,
@@ -293,7 +303,7 @@ window.showmapresultfail = function() {
             type: 'cartodb',
             sublayers: [{
                 sql: "SELECT * FROM map_game_nature WHERE cartodb_id IN (" + fail + ")",
-                cartocss: '#map_game_nature{ marker-fill-opacity: 1; marker-line-color: #FFF; marker-line-width: 1.5; marker-line-opacity: 1; marker-placement: point; marker-type: ellipse; marker-width: 20; marker-fill: red; marker-allow-overlap: true; }',
+                cartocss: '#map_game_nature{ marker-fill-opacity: 1; marker-line-color: #FFF; marker-line-width: 1.5; marker-line-opacity: 1; marker-placement: point; marker-type: ellipse; marker-width: 25; marker-fill: red; marker-allow-overlap: true; }',
                 interactivity: 'name, the_geom, description'
             }]
         })
@@ -336,7 +346,7 @@ window.showmapresultcorrect = function() {
             type: 'cartodb',
             sublayers: [{
                 sql: "SELECT * FROM map_game_nature WHERE cartodb_id IN (" + correct + ")",
-                cartocss: '#map_game_nature{ marker-fill-opacity: 1; marker-line-color: #FFF; marker-line-width: 1.5; marker-line-opacity: 1; marker-placement: point; marker-type: ellipse; marker-width: 20; marker-fill: green; marker-allow-overlap: true; }',
+                cartocss: '#map_game_nature{ marker-fill-opacity: 1; marker-line-color: #FFF; marker-line-width: 1.5; marker-line-opacity: 1; marker-placement: point; marker-type: ellipse; marker-width: 25; marker-fill: green; marker-allow-overlap: true; }',
                 interactivity: 'name, the_geom, description'
             }]
         })
