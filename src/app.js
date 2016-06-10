@@ -49,8 +49,10 @@ window.getdata = function() {
 }
 
 window.main = function() {
+    scorenumber = 1;
     getdata();
     if (startmap == false) {
+        //alert(numberquestion);
         contador = questions.length;
         number = Math.floor((Math.random() * contador) + 0);
         swal({
@@ -108,7 +110,7 @@ window.main = function() {
                     $("#finishbutn").html("Start new game");
                     swal({
                         title: "You have",
-                        text: "success: " + correct.length + " fails:" + fail.length + " ",
+                        text: "<span style='color:green;'>success: " + correct.length + "</span> <span style='color:red;'>fails:" + fail.length + "</span>",
                         confirmButtonColor: "#0472b8",
                         confirmButtonText: "Show map results",
                         closeOnConfirm: true,
@@ -118,12 +120,15 @@ window.main = function() {
                         map.remove();
                         if (fail.length == 0 && correct.length == 0) {}
                         if (fail.length > 0 && correct.length > 0) {
+                            numberquestion = 0;
                             showmapresultall();
                         }
                         if (fail.length > 0 && correct.length == 0) {
+                            numberquestion = 0;
                             showmapresultfail();
                         }
                         if (fail.length == 0 && correct.length > 0) {
+                            numberquestion = 0;
                             showmapresultcorrect();
                         }
                     });
@@ -263,7 +268,7 @@ window.showmapresultall = function() {
                     closeOnCancel: false
                 }, function(isConfirm) {
                     if (isConfirm) {} else {
-                        alert(data.moreinfo);
+                        //alert(data.moreinfo);
                     }
                 });
             });
@@ -307,7 +312,7 @@ window.showmapresultfail = function() {
                     closeOnCancel: false
                 }, function(isConfirm) {
                     if (isConfirm) {} else {
-                        alert(data.moreinfo);
+                        //alert(data.moreinfo);
                     }
                 });
             });
@@ -350,7 +355,7 @@ window.showmapresultcorrect = function() {
                     closeOnCancel: true
                 }, function(isConfirm) {
                     if (isConfirm) {} else {
-                        alert(data.moreinfo);
+                        //alert(data.moreinfo);
                         //window.open(data.moreinfo, '_blank');
                     }
                 });
