@@ -1,7 +1,7 @@
 {
   "name": "pruebawebpack",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",
   "dependencies": {
     "babel-polyfill": "^6.9.1",
     "jquery": "^3.0.0",
@@ -13,7 +13,8 @@
     "babel-preset-es2015": "^6.9.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "Vizzuality",
