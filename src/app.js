@@ -321,10 +321,11 @@ window.skipquestion = function() {
             title: "Question " + numberquestion + "/ " + totalnumber,
             text: "WHERE IS " + questions[number] + " ?",
             confirmButtonColor: "#0472b8",
+            showCancelButton:true,
             confirmButtonText: "Go map",
             cancelButtonText: "Skip question",
             closeOnConfirm: true,
-            closeOnCancel: true
+            closeOnCancel: false
         }, function(isConfirm) {
             if (isConfirm) {
                 $("#questionbox").css("display", "block");
