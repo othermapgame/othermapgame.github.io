@@ -174,7 +174,6 @@ window.main = function() {
                     });
                 } else {
                     if (questions[number] == data.name) {
-                        numberboolean = number + 1;
                         $.post("https://hectoruch.cartodb.com/api/v2/sql?q=UPDATE map_game_nature SET isanswer = true WHERE cartodb_id = " + idquestion[number] + " &api_key=be1f15570e60388973be3cb08edb426e8df1dfbf");
                         scorenumber++;
                         correct.push(idquestion[number]);

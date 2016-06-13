@@ -3,6 +3,16 @@
   Style.
 */
 
+/*
+COLORS
+primary: #0473b9
+secondary: #8CD4F5
+gray: #eaeaea
+secondgray: #c1c1c1
+black:
+white: #FFF
+*/
+
 @import url(https://fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,700italic,900italic,900|Montserrat:400,700);
 #map, body, html {
     height: 100%;
