@@ -13,6 +13,7 @@ Start by installing the required nodejs packages using `npm` (already bundled wi
 ```
 npm install
 npm install file-loader --save
+npm install connect serve-static
 ```
 
 Next, start the server by running:
