@@ -85,6 +85,17 @@ body {
     font-family: "Montserrat", sans-serif;
     text-transform: capitalize;
 }
+#questionbox b {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: inherit;
+    color: #8CD4F5;
+    font-family: "Montserrat", sans-serif;
+    text-transform: capitalize;
+    cursor: pointer;
+    border-left: 1px solid #333;
+    padding-left: 2px;
+}
 .sideBar {
     display: flex;
     flex-direction: column;

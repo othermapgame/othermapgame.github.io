@@ -5,6 +5,9 @@ require("../style/normalize.css");
 require("../style/style.css");
 require("../node_modules/sweetalert/dist/sweetalert.css");
 
+var alertm = require('./message').showalert;
+alertm();
+
 var draw = require('./functions');
 draw();
 
@@ -23,6 +26,22 @@ var contador = 0; /*many questions are complete*/
 var startmap = false;
 var map = "";
 var totalnumber = 0;
+
+window.addCursorInteraction = function() {
+    var hovers = [];
+    layer.bind('featureOver', function(e, latlon, pxPos, data, layer) {
+        hovers[layer] = 1;
+        if (_.any(hovers)) {
+            $('#map').css('cursor', 'pointer');
+        }
+    });
+    layer.bind('featureOut', function(m, layer) {
+        hovers[layer] = 0;
+        if (!_.any(hovers)) {
+            $('#map').css('cursor', 'auto');
+        }
+    });
+}
 
 window.opendash = function() {
     $(".sideBar").css("top", "0px");
@@ -49,6 +68,7 @@ window.getdata = function() {
 }
 
 window.main = function() {
+    $.post("https://hectoruch.cartodb.com/api/v2/sql?q=UPDATE map_game_nature SET isanswer = false WHERE isanswer = true &api_key=be1f15570e60388973be3cb08edb426e8df1dfbf");
     scorenumber = 1;
     getdata();
     if (startmap == false) {
@@ -62,15 +82,21 @@ window.main = function() {
             confirmButtonText: "Start, right now!",
             closeOnConfirm: false,
         }, function() {
-            document.getElementById("questionbox").innerHTML = "<span>WHERE IS " + questions[number] + " ?</span>";
+            document.getElementById("questionbox").innerHTML = "<span>WHERE IS " + questions[number] + " ?</span> <b onClick='skipquestion()'>Skip Question</b>";
             swal({
                 title: "Question " + numberquestion + "/ " + totalnumber,
                 text: "WHERE IS " + questions[number] + " ?",
+                showCancelButton: true,
                 confirmButtonColor: "#0472b8",
                 confirmButtonText: "Go map",
+                cancelButtonText: "Skip question",
+                closeOnConfirm: true,
+                closeOnCancel: false
             }, function(isConfirm) {
                 if (isConfirm) {
                     $("#questionbox").css("display", "block");
+                } else {
+                    skipquestion();
                 }
             });
         });
@@ -103,13 +129,20 @@ window.main = function() {
         })
         .addTo(map)
         .done(function(layer) {
-            layer.on('featureOver', function(e, latlng, pos, data) {
-                $(this).css("cursor","pointer");
-            });
-            layer.on('featureOut', function(e, latlng, pos, data) {
-
-            });
             layer.setInteraction(true);
+            var hovers = [];
+            layer.bind('featureOver', function(e, latlon, pxPos, data, layer) {
+                hovers[layer] = 1;
+                if (_.any(hovers)) {
+                    $('#map').css('cursor', 'pointer');
+                }
+            });
+            layer.bind('featureOut', function(m, layer) {
+                hovers[layer] = 0;
+                if (!_.any(hovers)) {
+                    $('#map').css('cursor', 'auto');
+                }
+            });
             layer.on('featureClick', function(e, latlng, pos, data) {
                 $("#questionbox").css("display", "none");
                 if (idquestion.length == 1) {
@@ -141,40 +174,55 @@ window.main = function() {
                     });
                 } else {
                     if (questions[number] == data.name) {
+                        numberboolean = number + 1;
+                        $.post("https://hectoruch.cartodb.com/api/v2/sql?q=UPDATE map_game_nature SET isanswer = true WHERE cartodb_id = " + idquestion[number] + " &api_key=be1f15570e60388973be3cb08edb426e8df1dfbf");
                         scorenumber++;
                         correct.push(idquestion[number]);
                         questions.splice(number, 1);
                         idquestion.splice(number, 1);
                         contador = questions.length;
                         number = Math.floor((Math.random() * contador) + 0);
-                        document.getElementById("questionbox").innerHTML = "<span>WHERE IS " + questions[number] + " ?</span>";
+                        document.getElementById("questionbox").innerHTML = "<span>WHERE IS " + questions[number] + " ?</span> <b onClick='skipquestion()'>Skip Question</b>";
                         numberquestion++;
                         swal({
                             title: "Question " + numberquestion + "/ " + totalnumber,
                             text: "WHERE IS " + questions[number] + " ?",
                             confirmButtonColor: "#0472b8",
+                            showCancelButton: true,
                             confirmButtonText: "Go map",
+                            cancelButtonText: "Skip question",
+                            closeOnConfirm: true,
+                            closeOnCancel: false
                         }, function(isConfirm) {
                             if (isConfirm) {
                                 $("#questionbox").css("display", "block");
+                            } else {
+                                skipquestion();
                             }
                         });
                     } else {
+                        $.post("https://hectoruch.cartodb.com/api/v2/sql?q=UPDATE map_game_nature SET isanswer = true WHERE cartodb_id = " + idquestion[number] + " &api_key=be1f15570e60388973be3cb08edb426e8df1dfbf");
                         fail.push(idquestion[number]);
                         questions.splice(number, 1);
                         idquestion.splice(number, 1);
                         contador = questions.length;
                         number = Math.floor((Math.random() * contador) + 0);
-                        document.getElementById("questionbox").innerHTML = "<span>WHERE IS " + questions[number] + " ?</span>";
+                        document.getElementById("questionbox").innerHTML = "<span>WHERE IS " + questions[number] + " ?</span> <b onClick='skipquestion()'>Skip Question</b>";
                         numberquestion++;
                         swal({
                             title: "Question " + numberquestion + "/ " + totalnumber,
                             text: "WHERE IS " + questions[number] + " ?",
                             confirmButtonColor: "#0472b8",
+                            showCancelButton: true,
                             confirmButtonText: "Go map",
+                            cancelButtonText: "Skip question",
+                            closeOnConfirm: true,
+                            closeOnCancel: false
                         }, function(isConfirm) {
                             if (isConfirm) {
                                 $("#questionbox").css("display", "block");
+                            } else {
+                                skipquestion();
                             }
                         });
                     }
@@ -212,7 +260,7 @@ window.finishgame = function() {
                 map.remove();
                 $.post("https://hectoruch.cartodb.com/api/v2/sql?q=INSERT INTO user_half_earth_game (the_geom, correctanswer, failanswer, points, lat, long) VALUES (ST_SetSRID(ST_Point(" + long + ", " + lat + "),4326), '" + correct + "', '" + fail + "', '" + scorenumber + "', '" + lat + "', '" + long + "')&api_key=be1f15570e60388973be3cb08edb426e8df1dfbf");
                 if (fail.length == 0 && correct.length == 0) {
-                    main();
+                    showmapresultfail();
                 }
                 if (fail.length > 0 && correct.length > 0) {
                     numberquestion = 0;
@@ -234,12 +282,68 @@ window.finishgame = function() {
     });
 }
 
+window.skipquestion = function() {
+    if (idquestion.length == 1) {
+        $("#finishbutn").attr("onClick", "main()");
+        $("#finishbutn").html("Start new game");
+        swal({
+            title: "You have",
+            text: "<span style='color:green;'>success: " + correct.length + "</span> <span style='color:red;'>fails:" + fail.length + "</span>",
+            confirmButtonColor: "#0472b8",
+            confirmButtonText: "Show map results",
+            closeOnConfirm: true,
+            html: true,
+        }, function() {
+            $.post("https://hectoruch.cartodb.com/api/v2/sql?q=INSERT INTO user_half_earth_game (the_geom, correctanswer, failanswer, points, lat, long) VALUES (ST_SetSRID(ST_Point(" + long + ", " + lat + "),4326), '" + correct + "', '" + fail + "', '" + scorenumber + "', '" + lat + "', '" + long + "')&api_key=be1f15570e60388973be3cb08edb426e8df1dfbf");
+            map.remove();
+            if (fail.length == 0 && correct.length == 0) {}
+            if (fail.length > 0 && correct.length > 0) {
+                numberquestion = 0;
+                showmapresultall();
+            }
+            if (fail.length > 0 && correct.length == 0) {
+                numberquestion = 0;
+                showmapresultfail();
+            }
+            if (fail.length == 0 && correct.length > 0) {
+                numberquestion = 0;
+                showmapresultcorrect();
+            }
+        });
+    } else {
+        questions.splice(number, 1);
+        idquestion.splice(number, 1);
+        contador = questions.length;
+        number = Math.floor((Math.random() * contador) + 0);
+        $("#questionbox").css("display", "none");
+        document.getElementById("questionbox").innerHTML = "<span>WHERE IS " + questions[number] + " ?</span> <b onClick='skipquestion()'>Skip Question</b>";
+        numberquestion++;
+        swal({
+            title: "Question " + numberquestion + "/ " + totalnumber,
+            text: "WHERE IS " + questions[number] + " ?",
+            confirmButtonColor: "#0472b8",
+            confirmButtonText: "Go map",
+            cancelButtonText: "Skip question",
+            closeOnConfirm: true,
+            closeOnCancel: true
+        }, function(isConfirm) {
+            if (isConfirm) {
+                $("#questionbox").css("display", "block");
+            } else {
+                skipquestion();
+            }
+        });
+    }
+}
+
 window.showmapresultall = function() {
     $("body").append("<div id='map'></div>");
     map = new L.Map('map', {
         zoomControl: false,
         center: [0, 0],
-        zoom: 3
+        zoom: 3,
+        maxZoom: 6,
+        minZoom: 3
     });
     L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', { /*http://maps.stamen.com/*/
         attribution: 'Stamen'
@@ -260,12 +364,19 @@ window.showmapresultall = function() {
         .addTo(map)
         .done(function(layer) {
             layer.setInteraction(true);
-            /*layer.on('featureOver', function(e, latlng, pos, data) {
-              alert("entro");
+            var hovers = [];
+            layer.bind('featureOver', function(e, latlon, pxPos, data, layer) {
+                hovers[layer] = 1;
+                if (_.any(hovers)) {
+                    $('#map').css('cursor', 'pointer');
+                }
             });
-            layer.on('featureOut', function(e, latlng, pos, data) {
-              alert("salgo");
-            });*/
+            layer.bind('featureOut', function(m, layer) {
+                hovers[layer] = 0;
+                if (!_.any(hovers)) {
+                    $('#map').css('cursor', 'auto');
+                }
+            });
             layer.on('featureClick', function(e, latlng, pos, data) {
                 swal({
                     title: data.name,
@@ -292,7 +403,9 @@ window.showmapresultfail = function() {
     map = new L.Map('map', {
         zoomControl: false,
         center: [0, 0],
-        zoom: 3
+        zoom: 3,
+        maxZoom: 6,
+        minZoom: 3
     });
     L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', { /*http://maps.stamen.com/*/
         attribution: 'Stamen'
@@ -310,6 +423,19 @@ window.showmapresultfail = function() {
         .addTo(map)
         .done(function(layer) {
             layer.setInteraction(true);
+            var hovers = [];
+            layer.bind('featureOver', function(e, latlon, pxPos, data, layer) {
+                hovers[layer] = 1;
+                if (_.any(hovers)) {
+                    $('#map').css('cursor', 'pointer');
+                }
+            });
+            layer.bind('featureOut', function(m, layer) {
+                hovers[layer] = 0;
+                if (!_.any(hovers)) {
+                    $('#map').css('cursor', 'auto');
+                }
+            });
             layer.on('featureClick', function(e, latlng, pos, data) {
                 swal({
                     title: data.name,
@@ -336,7 +462,9 @@ window.showmapresultcorrect = function() {
     map = new L.Map('map', {
         zoomControl: false,
         center: [0, 0],
-        zoom: 3
+        zoom: 3,
+        maxZoom: 6,
+        minZoom: 3
     });
     L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', { /*http://maps.stamen.com/*/
         attribution: 'Stamen'
@@ -353,6 +481,19 @@ window.showmapresultcorrect = function() {
         .addTo(map)
         .done(function(layer) {
             layer.setInteraction(true);
+            var hovers = [];
+            layer.bind('featureOver', function(e, latlon, pxPos, data, layer) {
+                hovers[layer] = 1;
+                if (_.any(hovers)) {
+                    $('#map').css('cursor', 'pointer');
+                }
+            });
+            layer.bind('featureOut', function(m, layer) {
+                hovers[layer] = 0;
+                if (!_.any(hovers)) {
+                    $('#map').css('cursor', 'auto');
+                }
+            });
             layer.on('featureClick', function(e, latlng, pos, data) {
                 swal({
                     title: data.name,
