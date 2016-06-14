@@ -14,9 +14,7 @@ draw();
 var lat = 0;
 var long = 0;
 var questions = []; /*array questions (name)*/
-var answer = []; /*copy of array questions*/
 var idquestion = [];
-var idanswer = [];
 var correct = []; /*array questions good answered*/
 var fail = []; /*array question bad answered*/
 var number = 0; /*random number for questions, always differente*/
@@ -27,7 +25,6 @@ var startmap = false;
 var map = "";
 var totalnumber = 0;
 var questiontext = [];
-var questiontextrecover = [];
 
 window.addCursorInteraction = function() {
     var hovers = [];
@@ -62,11 +59,8 @@ window.getdata = function() {
         $.each(data.rows, function(key, val) {
             totalnumber = data.rows.length;
             questions.push(val.name);
-            answer.push(val.name);
             questiontext.push(val.question);
-            questiontextrecover.push(val.question);
             idquestion.push(val.cartodb_id);
-            idanswer.push(val.cartodb_id);
         });
     });
 }
