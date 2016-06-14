@@ -359,11 +359,11 @@ window.showmapresultall = function() {
             sublayers: [{
                 sql: "SELECT * FROM map_game_nature WHERE cartodb_id IN (" + fail + ")",
                 cartocss: '#map_game_nature{ marker-fill-opacity: 1; marker-line-color: #FFF; marker-line-width: 1.5; marker-line-opacity: 1; marker-placement: point; marker-type: ellipse; marker-width: 25; marker-fill: red; marker-allow-overlap: true; }',
-                interactivity: 'name, the_geom, description'
+                interactivity: 'name, the_geom, description, linkother'
             }, {
                 sql: "SELECT * FROM map_game_nature WHERE cartodb_id IN (" + correct + ")",
                 cartocss: '#map_game_nature{ marker-fill-opacity: 1; marker-line-color: #FFF; marker-line-width: 1.5; marker-line-opacity: 1; marker-placement: point; marker-type: ellipse; marker-width: 25; marker-fill: green; marker-allow-overlap: true; }',
-                interactivity: 'name, the_geom, description'
+                interactivity: 'name, the_geom, description, linkother'
             }]
         })
         .addTo(map)
@@ -394,7 +394,7 @@ window.showmapresultall = function() {
                     closeOnCancel: false
                 }, function(isConfirm) {
                     if (isConfirm) {} else {
-                        //alert(data.moreinfo);
+                        window.open(data.linkother);
                     }
                 });
             });
@@ -422,7 +422,7 @@ window.showmapresultfail = function() {
             sublayers: [{
                 sql: "SELECT * FROM map_game_nature WHERE cartodb_id IN (" + fail + ")",
                 cartocss: '#map_game_nature{ marker-fill-opacity: 1; marker-line-color: #FFF; marker-line-width: 1.5; marker-line-opacity: 1; marker-placement: point; marker-type: ellipse; marker-width: 25; marker-fill: red; marker-allow-overlap: true; }',
-                interactivity: 'name, the_geom, description'
+                interactivity: 'name, the_geom, description, linkother'
             }]
         })
         .addTo(map)
@@ -453,7 +453,7 @@ window.showmapresultfail = function() {
                     closeOnCancel: false
                 }, function(isConfirm) {
                     if (isConfirm) {} else {
-                        //alert(data.moreinfo);
+                        window.open(data.linkother);
                     }
                 });
             });
@@ -480,7 +480,7 @@ window.showmapresultcorrect = function() {
             sublayers: [{
                 sql: "SELECT * FROM map_game_nature WHERE cartodb_id IN (" + correct + ")",
                 cartocss: '#map_game_nature{ marker-fill-opacity: 1; marker-line-color: #FFF; marker-line-width: 1.5; marker-line-opacity: 1; marker-placement: point; marker-type: ellipse; marker-width: 25; marker-fill: green; marker-allow-overlap: true; }',
-                interactivity: 'name, the_geom, description'
+                interactivity: 'name, the_geom, description, linkother'
             }]
         })
         .addTo(map)
@@ -511,8 +511,7 @@ window.showmapresultcorrect = function() {
                     closeOnCancel: true
                 }, function(isConfirm) {
                     if (isConfirm) {} else {
-                        //alert(data.moreinfo);
-                        //window.open(data.moreinfo, '_blank');
+                        window.open(data.linkother);
                     }
                 });
             });
