@@ -171,6 +171,8 @@ window.main = function() {
                 }
             });
             layer.on('featureClick', function(e, latlng, pos, data) {
+              //layer.setSql(aquilasql)
+              //console.log($(e).attr( "css" ).value);
               //$("#map_game_nature [cartodb_id="+data.cartodb_id+"]").css("marker-fill","red");
                 $("#questionbox").css("display", "none");
                 if (idquestion.length == 1) {
