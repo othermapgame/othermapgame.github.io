@@ -26,6 +26,8 @@ var contador = 0; /*many questions are complete*/
 var startmap = false;
 var map = "";
 var totalnumber = 0;
+var questiontext = [];
+var questiontextrecover = [];
 
 window.addCursorInteraction = function() {
     var hovers = [];
@@ -61,6 +63,8 @@ window.getdata = function() {
             totalnumber = data.rows.length;
             questions.push(val.name);
             answer.push(val.name);
+            questiontext.push(val.question);
+            questiontextrecover.push(val.question);
             idquestion.push(val.cartodb_id);
             idanswer.push(val.cartodb_id);
         });
@@ -69,8 +73,9 @@ window.getdata = function() {
 
 window.main = function() {
     $.post("https://hectoruch.cartodb.com/api/v2/sql?q=UPDATE map_game_nature SET isanswer = false WHERE isanswer = true &api_key=be1f15570e60388973be3cb08edb426e8df1dfbf");
-    scorenumber = 1;
     getdata();
+    scorenumber = 1;
+    numberquestion = 1
     if (startmap == false) {
         //alert(numberquestion);
         contador = questions.length;
@@ -82,10 +87,10 @@ window.main = function() {
             confirmButtonText: "Start, right now!",
             closeOnConfirm: false,
         }, function() {
-            document.getElementById("questionbox").innerHTML = "<span>( " + numberquestion + "/ " + totalnumber + " ) WHERE IS " + questions[number] + " ?</span> <b onClick='skipquestion()'>Skip Question</b>";
+            document.getElementById("questionbox").innerHTML = "<span>( " + numberquestion + "/ " + totalnumber + " ) " + questiontext[number] + "</span> <b onClick='skipquestion()'>Skip Question</b>";
             swal({
                 title: "Question " + numberquestion + "/ " + totalnumber,
-                text: "WHERE IS " + questions[number] + " ?",
+                text: questiontext[number],
                 showCancelButton: true,
                 confirmButtonColor: "#0472b8",
                 confirmButtonText: "Go to map",
@@ -101,7 +106,35 @@ window.main = function() {
             });
         });
     } else {
+        closedash();
         map.remove();
+        contador = questions.length;
+        number = Math.floor((Math.random() * contador) + 0);
+        swal({
+            title: "half_earth_game",
+            text: "Answer questions with the map, good luck!",
+            confirmButtonColor: "#0472b8",
+            confirmButtonText: "Start, right now!",
+            closeOnConfirm: false,
+        }, function() {
+            document.getElementById("questionbox").innerHTML = "<span>( " + numberquestion + "/ " + totalnumber + " ) " + questiontext[number] + "</span> <b onClick='skipquestion()'>Skip Question</b>";
+            swal({
+                title: "Question " + numberquestion + "/ " + totalnumber,
+                text: questiontext[number],
+                showCancelButton: true,
+                confirmButtonColor: "#0472b8",
+                confirmButtonText: "Go to map",
+                cancelButtonText: "Skip question",
+                closeOnConfirm: true,
+                closeOnCancel: false
+            }, function(isConfirm) {
+                if (isConfirm) {
+                    $("#questionbox").css("display", "block");
+                } else {
+                    skipquestion();
+                }
+            });
+        });
     }
     startmap = true;
     $("#finishbutn").attr("onClick", "finishgame()");
@@ -144,7 +177,7 @@ window.main = function() {
                 }
             });
             layer.on('featureClick', function(e, latlng, pos, data) {
-              $(e).css("marker-line-width","4");
+                $(layer).css("marker-line-width", "4");
                 $("#questionbox").css("display", "none");
                 if (idquestion.length == 1) {
                     $("#finishbutn").attr("onClick", "main()");
@@ -179,14 +212,15 @@ window.main = function() {
                         scorenumber++;
                         correct.push(idquestion[number]);
                         questions.splice(number, 1);
+                        questiontext.splice(number, 1);
                         idquestion.splice(number, 1);
                         contador = questions.length;
                         number = Math.floor((Math.random() * contador) + 0);
                         numberquestion++;
-                        document.getElementById("questionbox").innerHTML = "<span>( " + numberquestion + "/ " + totalnumber + " ) WHERE IS " + questions[number] + " ?</span> <b onClick='skipquestion()'>Skip Question</b>";
+                        document.getElementById("questionbox").innerHTML = "<span>( " + numberquestion + "/ " + totalnumber + " ) " + questiontext[number] + "</span> <b onClick='skipquestion()'>Skip Question</b>";
                         swal({
                             title: "Question " + numberquestion + "/ " + totalnumber,
-                            text: "WHERE IS " + questions[number] + " ?",
+                            text: questiontext[number],
                             confirmButtonColor: "#0472b8",
                             showCancelButton: true,
                             confirmButtonText: "Go to map",
@@ -204,15 +238,16 @@ window.main = function() {
                         $.post("https://hectoruch.cartodb.com/api/v2/sql?q=UPDATE map_game_nature SET isanswer = true WHERE cartodb_id = " + idquestion[number] + " &api_key=be1f15570e60388973be3cb08edb426e8df1dfbf");
                         fail.push(idquestion[number]);
                         questions.splice(number, 1);
+                        questiontext.splice(number, 1);
                         idquestion.splice(number, 1);
                         contador = questions.length;
                         number = Math.floor((Math.random() * contador) + 0);
                         numberquestion++;
-                        document.getElementById("questionbox").innerHTML = "<span>( " + numberquestion + "/ " + totalnumber + " ) WHERE IS " + questions[number] + " ?</span> <b onClick='skipquestion()'>Skip Question</b>";
+                        document.getElementById("questionbox").innerHTML = "<span>( " + numberquestion + "/ " + totalnumber + " ) " + questiontext[number] + "</span> <b onClick='skipquestion()'>Skip Question</b>";
 
                         swal({
                             title: "Question " + numberquestion + "/ " + totalnumber,
-                            text: "WHERE IS " + questions[number] + " ?",
+                            text: questiontext[number],
                             confirmButtonColor: "#0472b8",
                             showCancelButton: true,
                             confirmButtonText: "Go to map",
@@ -298,8 +333,8 @@ window.skipquestion = function() {
             $.post("https://hectoruch.cartodb.com/api/v2/sql?q=INSERT INTO user_half_earth_game (the_geom, correctanswer, failanswer, points, lat, long) VALUES (ST_SetSRID(ST_Point(" + long + ", " + lat + "),4326), '" + correct + "', '" + fail + "', '" + scorenumber + "', '" + lat + "', '" + long + "')&api_key=be1f15570e60388973be3cb08edb426e8df1dfbf");
             map.remove();
             if (fail.length == 0 && correct.length == 0) {
-              numberquestion = 0;
-              showmapresultall();
+                numberquestion = 0;
+                showmapresultall();
             }
             if (fail.length > 0 && correct.length > 0) {
                 numberquestion = 0;
@@ -316,16 +351,17 @@ window.skipquestion = function() {
         });
     } else {
         questions.splice(number, 1);
+        questiontext.splice(number, 1);
         idquestion.splice(number, 1);
         contador = questions.length;
         number = Math.floor((Math.random() * contador) + 0);
         $("#questionbox").css("display", "none");
         numberquestion++;
-        document.getElementById("questionbox").innerHTML = "<span>( " + numberquestion + "/ " + totalnumber + " ) WHERE IS " + questions[number] + " ?</span> <b onClick='skipquestion()'>Skip Question</b>";
+        document.getElementById("questionbox").innerHTML = "<span>( " + numberquestion + "/ " + totalnumber + " ) " + questiontext[number] + "</span> <b onClick='skipquestion()'>Skip Question</b>";
 
         swal({
             title: "Question " + numberquestion + "/ " + totalnumber,
-            text: "WHERE IS " + questions[number] + " ?",
+            text: questiontext[number],
             confirmButtonColor: "#0472b8",
             showCancelButton: true,
             confirmButtonText: "Go to map",
@@ -343,6 +379,7 @@ window.skipquestion = function() {
 }
 
 window.showmapresultall = function() {
+    closedash();
     $("body").append("<div id='map'></div>");
     map = new L.Map('map', {
         zoomControl: false,
@@ -405,6 +442,7 @@ window.showmapresultall = function() {
 }
 
 window.showmapresultfail = function() {
+    closedash();
     $("body").append("<div id='map'></div>");
     map = new L.Map('map', {
         zoomControl: false,
@@ -464,6 +502,7 @@ window.showmapresultfail = function() {
 }
 
 window.showmapresultcorrect = function() {
+    closedash();
     $("body").append("<div id='map'></div>");
     map = new L.Map('map', {
         zoomControl: false,
@@ -520,6 +559,4 @@ window.showmapresultcorrect = function() {
             cartodb.log.log("some error occurred");
         });
 }
-
-
 window.onload = main;
