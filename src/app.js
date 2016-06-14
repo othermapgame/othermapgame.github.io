@@ -151,7 +151,7 @@ window.main = function() {
             sublayers: [{
                 sql: "SELECT * FROM map_game_nature",
                 cartocss: '#map_game_nature{ marker-fill-opacity: 1; marker-line-color: #FFF; marker-line-width: 1.5; marker-line-opacity: 1; marker-placement: point; marker-type: ellipse; marker-width: 25; marker-fill: #0272b9; marker-allow-overlap: true; }',
-                interactivity: 'name, the_geom, description'
+                interactivity: 'name, the_geom, description, cartodb_id'
             }]
         })
         .addTo(map)
@@ -171,7 +171,7 @@ window.main = function() {
                 }
             });
             layer.on('featureClick', function(e, latlng, pos, data) {
-                $(layer).css("marker-line-width", "4");
+              //$("#map_game_nature [cartodb_id="+data.cartodb_id+"]").css("marker-fill","red");
                 $("#questionbox").css("display", "none");
                 if (idquestion.length == 1) {
                     $("#finishbutn").attr("onClick", "main()");
