@@ -88,7 +88,7 @@ window.main = function() {
                 text: "WHERE IS " + questions[number] + " ?",
                 showCancelButton: true,
                 confirmButtonColor: "#0472b8",
-                confirmButtonText: "Go map",
+                confirmButtonText: "Go to map",
                 cancelButtonText: "Skip question",
                 closeOnConfirm: true,
                 closeOnCancel: false
@@ -144,6 +144,7 @@ window.main = function() {
                 }
             });
             layer.on('featureClick', function(e, latlng, pos, data) {
+              $(e).css("marker-line-width","4");
                 $("#questionbox").css("display", "none");
                 if (idquestion.length == 1) {
                     $("#finishbutn").attr("onClick", "main()");
@@ -152,7 +153,7 @@ window.main = function() {
                         title: "You have",
                         text: "<span style='color:green;'>success: " + correct.length + "</span> <span style='color:red;'>fails:" + fail.length + "</span>",
                         confirmButtonColor: "#0472b8",
-                        confirmButtonText: "Show map results",
+                        confirmButtonText: "Show results",
                         closeOnConfirm: true,
                         html: true,
                     }, function() {
@@ -188,7 +189,7 @@ window.main = function() {
                             text: "WHERE IS " + questions[number] + " ?",
                             confirmButtonColor: "#0472b8",
                             showCancelButton: true,
-                            confirmButtonText: "Go map",
+                            confirmButtonText: "Go to map",
                             cancelButtonText: "Skip question",
                             closeOnConfirm: true,
                             closeOnCancel: false
@@ -214,7 +215,7 @@ window.main = function() {
                             text: "WHERE IS " + questions[number] + " ?",
                             confirmButtonColor: "#0472b8",
                             showCancelButton: true,
-                            confirmButtonText: "Go map",
+                            confirmButtonText: "Go to map",
                             cancelButtonText: "Skip question",
                             closeOnConfirm: true,
                             closeOnCancel: false
@@ -253,7 +254,7 @@ window.finishgame = function() {
                 title: "You have",
                 text: "<span style='color:green;'>success: " + correct.length + "</span> <span style='color:red;'>fails:" + fail.length + "</span>",
                 confirmButtonColor: "#0472b8",
-                confirmButtonText: "Show map results",
+                confirmButtonText: "Show results",
                 closeOnConfirm: true,
                 html: true,
             }, function() {
@@ -277,7 +278,7 @@ window.finishgame = function() {
 
             });
         } else {
-            swal("Cancelled", "Your game is save", "error");
+            swal("Cancelled", "Your game is saved", "error");
         }
     });
 }
@@ -290,7 +291,7 @@ window.skipquestion = function() {
             title: "You have",
             text: "<span style='color:green;'>success: " + correct.length + "</span> <span style='color:red;'>fails:" + fail.length + "</span>",
             confirmButtonColor: "#0472b8",
-            confirmButtonText: "Show map results",
+            confirmButtonText: "Show results",
             closeOnConfirm: true,
             html: true,
         }, function() {
@@ -327,7 +328,7 @@ window.skipquestion = function() {
             text: "WHERE IS " + questions[number] + " ?",
             confirmButtonColor: "#0472b8",
             showCancelButton: true,
-            confirmButtonText: "Go map",
+            confirmButtonText: "Go to map",
             cancelButtonText: "Skip question",
             closeOnConfirm: true,
             closeOnCancel: false
