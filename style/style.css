@@ -3,6 +3,7 @@
   Style.
 */
 
+
 /*
 COLORS
 primary: #0473b9
@@ -94,6 +95,7 @@ body {
     color: #333;
     font-family: "Montserrat", sans-serif;
     text-transform: capitalize;
+    padding-right: 10px;
 }
 #questionbox b {
     font-weight: 500;
@@ -104,7 +106,7 @@ body {
     text-transform: capitalize;
     cursor: pointer;
     border-left: 1px solid #333;
-    padding-left: 2px;
+    padding-left: 10px;
 }
 .sideBar {
     display: flex;

@@ -82,7 +82,7 @@ window.main = function() {
             confirmButtonText: "Start, right now!",
             closeOnConfirm: false,
         }, function() {
-            document.getElementById("questionbox").innerHTML = "<span>WHERE IS " + questions[number] + " ?</span> <b onClick='skipquestion()'>Skip Question</b>";
+            document.getElementById("questionbox").innerHTML = "<span>( " + numberquestion + "/ " + totalnumber + " ) WHERE IS " + questions[number] + " ?</span> <b onClick='skipquestion()'>Skip Question</b>";
             swal({
                 title: "Question " + numberquestion + "/ " + totalnumber,
                 text: "WHERE IS " + questions[number] + " ?",
@@ -181,8 +181,8 @@ window.main = function() {
                         idquestion.splice(number, 1);
                         contador = questions.length;
                         number = Math.floor((Math.random() * contador) + 0);
-                        document.getElementById("questionbox").innerHTML = "<span>WHERE IS " + questions[number] + " ?</span> <b onClick='skipquestion()'>Skip Question</b>";
                         numberquestion++;
+                        document.getElementById("questionbox").innerHTML = "<span>( " + numberquestion + "/ " + totalnumber + " ) WHERE IS " + questions[number] + " ?</span> <b onClick='skipquestion()'>Skip Question</b>";
                         swal({
                             title: "Question " + numberquestion + "/ " + totalnumber,
                             text: "WHERE IS " + questions[number] + " ?",
@@ -206,8 +206,9 @@ window.main = function() {
                         idquestion.splice(number, 1);
                         contador = questions.length;
                         number = Math.floor((Math.random() * contador) + 0);
-                        document.getElementById("questionbox").innerHTML = "<span>WHERE IS " + questions[number] + " ?</span> <b onClick='skipquestion()'>Skip Question</b>";
                         numberquestion++;
+                        document.getElementById("questionbox").innerHTML = "<span>( " + numberquestion + "/ " + totalnumber + " ) WHERE IS " + questions[number] + " ?</span> <b onClick='skipquestion()'>Skip Question</b>";
+
                         swal({
                             title: "Question " + numberquestion + "/ " + totalnumber,
                             text: "WHERE IS " + questions[number] + " ?",
@@ -295,7 +296,10 @@ window.skipquestion = function() {
         }, function() {
             $.post("https://hectoruch.cartodb.com/api/v2/sql?q=INSERT INTO user_half_earth_game (the_geom, correctanswer, failanswer, points, lat, long) VALUES (ST_SetSRID(ST_Point(" + long + ", " + lat + "),4326), '" + correct + "', '" + fail + "', '" + scorenumber + "', '" + lat + "', '" + long + "')&api_key=be1f15570e60388973be3cb08edb426e8df1dfbf");
             map.remove();
-            if (fail.length == 0 && correct.length == 0) {}
+            if (fail.length == 0 && correct.length == 0) {
+              numberquestion = 0;
+              showmapresultall();
+            }
             if (fail.length > 0 && correct.length > 0) {
                 numberquestion = 0;
                 showmapresultall();
@@ -315,13 +319,14 @@ window.skipquestion = function() {
         contador = questions.length;
         number = Math.floor((Math.random() * contador) + 0);
         $("#questionbox").css("display", "none");
-        document.getElementById("questionbox").innerHTML = "<span>WHERE IS " + questions[number] + " ?</span> <b onClick='skipquestion()'>Skip Question</b>";
         numberquestion++;
+        document.getElementById("questionbox").innerHTML = "<span>( " + numberquestion + "/ " + totalnumber + " ) WHERE IS " + questions[number] + " ?</span> <b onClick='skipquestion()'>Skip Question</b>";
+
         swal({
             title: "Question " + numberquestion + "/ " + totalnumber,
             text: "WHERE IS " + questions[number] + " ?",
             confirmButtonColor: "#0472b8",
-            showCancelButton:true,
+            showCancelButton: true,
             confirmButtonText: "Go map",
             cancelButtonText: "Skip question",
             closeOnConfirm: true,

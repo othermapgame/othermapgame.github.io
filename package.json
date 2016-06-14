@@ -1,11 +1,15 @@
 {
-  "name": "pruebawebpack",
+  "name": "half_earth_game",
   "version": "1.0.0",
   "main": "server.js",
   "dependencies": {
     "babel-polyfill": "^6.9.1",
     "jquery": "^3.0.0",
     "webpack": "^1.13.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/othermapgame/othermapgame.github.io.git"
   },
   "devDependencies": {
     "babel-core": "^6.9.1",
@@ -17,10 +21,14 @@
     "start": "node server.js"
   },
   "keywords": [],
-  "author": "Vizzuality",
+  "author": "Hector Arce de las Heras",
   "license": "ISC",
   "bin": {
     "pruebawebpack": "app.bundle.js"
   },
-  "description": "map game"
+  "description": "half_earth_game",
+  "bugs": {
+    "url": "https://github.com/othermapgame/othermapgame/issues"
+  },
+  "homepage": "https://github.com/othermapgame/othermapgame#readme"
 }
